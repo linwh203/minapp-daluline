@@ -46,7 +46,7 @@
             <div class="spot-item-window-desc">{{currSpot.spot_describe}}</div>
           </div>
         </div>
-        <img class="right" mode="aspectFit" src="https://gw.alicdn.com/tfs/TB1wj_vvQvoK1RjSZFNXXcxMVXa-48-140.png" alt>
+        <img class="right" src="https://gw.alicdn.com/tfs/TB1nEsevNjaK1RjSZKzXXXVwXXa-54-140.png" alt>
       </div>
     </div>
   </div>
@@ -291,7 +291,7 @@ export default {
     getPosition() {
       return new Promise(resolve => {
         wx.getLocation({
-          type: "wgs84", //默认为 wgs84 返回 gps 坐标，gcj02 返回可用于wx.openLocation的坐标,
+          type: "gcj02", //默认为 wgs84 返回 gps 坐标，gcj02 返回可用于wx.openLocation的坐标,
           success: res => {
             resolve({ lng: res.longitude, lat: res.latitude });
           },

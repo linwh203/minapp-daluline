@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <div class="first-visit">
-      <img src="https://gw.alicdn.com/tfs/TB1QpJimSrqK1RjSZK9XXXyypXa-640-1136.png" alt>
+      <img src="https://gw.alicdn.com/tfs/TB1F9nJvIfpK1RjSZFOXXa6nFXa-640-1136.png" alt>
       <div class="close-btn" @click="bindNext"></div>
     </div>
     <div class="modal" v-if="motto">
       <div class="modal-container">
-        <img src="https://gw.alicdn.com/tfs/TB1UNN3qCzqK1RjSZFpXXakSXXa-544-700.png" alt>
+        <img src="https://gw.alicdn.com/tfs/TB18bz7vOLaK1RjSZFxXXamPFXa-544-700.png" alt>
         <button
           class="auth-confirm"
           open-type="getUserInfo"

@@ -2,8 +2,6 @@
   "pages": [
     "pages/index/main",
     "pages/index-sg/main",
-    "pages/map/main",
-    "pages/map-sg/main",
     "pages/quiz/main",
     "pages/quizdetail/main",
     "pages/my-reward/main",
@@ -26,9 +24,9 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#292770",
+    "navigationBarBackgroundColor": "#2b9f62",
     "backgroundColor": "#53c6f7",
-    "navigationBarTitleText": "青谷研习径",
+    "navigationBarTitleText": "鹿咀自然课堂步道",
     "navigationBarTextStyle": "#ffffff"
   }
 }

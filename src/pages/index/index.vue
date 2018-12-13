@@ -562,7 +562,7 @@ export default {
       width: 522rpx;
       height: 176rpx;
       border-bottom: 1px solid #c7c7c7;
-      background: url("https://gw.alicdn.com/tfs/TB1PHRpnCzqK1RjSZPxXXc4tVXa-1809-607.png")
+      background: url("https://gw.alicdn.com/tfs/TB1.crTvQvoK1RjSZFNXXcxMVXa-500-168.png")
         no-repeat center/contain;
       position: absolute;
       bottom: -180rpx;
@@ -643,7 +643,7 @@ export default {
       width: 522rpx;
       height: 176rpx;
       border-bottom: 1px solid #c7c7c7;
-      background: url("https://gw.alicdn.com/tfs/TB1PHRpnCzqK1RjSZPxXXc4tVXa-1809-607.png")
+      background: url("https://gw.alicdn.com/tfs/TB1.crTvQvoK1RjSZFNXXcxMVXa-500-168.png")
         no-repeat center/contain;
       position: absolute;
       bottom: 106rpx;
