@@ -1,0 +1,34 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/index-sg/main",
+    "pages/map/main",
+    "pages/map-sg/main",
+    "pages/quiz/main",
+    "pages/quizdetail/main",
+    "pages/my-reward/main",
+    "pages/my-msg/main",
+    "pages/my-map/main",
+    "pages/scan/main",
+    "pages/paint/main",
+    "pages/first/main",
+    "pages/list/main",
+    "pages/video/main",
+    "pages/my/main",
+    "pages/my-rule/main",
+    "pages/my-statement/main",
+    "pages/my-about/main",
+    "pages/my-suggest/main",
+    "pages/logs/main",
+    "pages/counter/main",
+    "pages/webview/main",
+    "pages/developing/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#292770",
+    "backgroundColor": "#53c6f7",
+    "navigationBarTitleText": "青谷研习径",
+    "navigationBarTextStyle": "#ffffff"
+  }
+}
