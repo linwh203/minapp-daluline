@@ -18,7 +18,7 @@ export default {
 
 page{
     height: 100%;
-    background-color:#292770;
+    background-color:#2b9f62;
 }
 .container {
   height: 100%;

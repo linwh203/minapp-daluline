@@ -1,40 +1,37 @@
 <template>
-  <div class="container" :style="{height:bodyHeight}">
+  <!-- <div class="container" :style="{height:bodyHeight}"> -->
+  <div class="container">
     <div class="index-tab">
+      <div class="index-tab-item icon-list">
+        <img src="https://gw.alicdn.com/tfs/TB1v2WWv7voK1RjSZPfXXXPKFXa-107-105.png">
+      </div>
       <div class="index-tab-item icon-map" @click="bindTab('../my-map/main?queryType=0')">
-        <img src="https://gw.alicdn.com/tfs/TB1hOhEmMDqK1RjSZSyXXaxEVXa-90-101.png" alt>
-      </div>
-      <div class="index-tab-item icon-list" @click="showRoadName">
-        <img
-          src="https://gw.alicdn.com/tfs/TB1dgd8nzTpK1RjSZKPXXa3UpXa-91-101.png"
-          v-if="showRoadSelect"
-        >
-        <img src="https://gw.alicdn.com/tfs/TB1gqFKmHvpK1RjSZFqXXcXUVXa-91-101.png" v-else>
-      </div>
-      <div class="index-tab-item icon-scan" @click="bindTab('../scan/main')">
-        <img src="https://gw.alicdn.com/tfs/TB1gWBKmHvpK1RjSZFqXXcXUVXa-91-101.png" alt>
+        <img src="https://gw.alicdn.com/tfs/TB1fwGTv4TpK1RjSZR0XXbEwXXa-104-96.png" alt>
       </div>
       <div class="index-tab-item icon-audio" @click="playAudio">
         <img
-          src="https://gw.alicdn.com/tfs/TB1PStFmSzqK1RjSZFLXXcn2XXa-91-101.png"
+          src="https://gw.alicdn.com/tfs/TB1OCGWv4TpK1RjSZFGXXcHqFXa-104-95.png"
           alt
           v-if="!isPlaying"
         >
         <img
-          src="https://gw.alicdn.com/tfs/TB1mMsUomzqK1RjSZFLXXcn2XXa-91-101.png"
+          src="https://gw.alicdn.com/tfs/TB1N1O0v9zqK1RjSZFpXXakSXXa-104-95.png"
           alt
           v-if="isPlaying"
         >
       </div>
-      <!-- <div class="index-tab-item icon-quiz" @click="bindTab('../quiz/main')"> -->
-      <div class="index-tab-item icon-quiz" @click="bindTab('../developing/main')">
-        <img src="https://gw.alicdn.com/tfs/TB1mz8HmQvoK1RjSZFNXXcxMVXa-91-101.png" alt>
+      <div class="index-tab-item icon-video" @click="bindTab('../video/main')">
+        <img src="https://gw.alicdn.com/tfs/TB1gTqYv9zqK1RjSZFHXXb3CpXa-104-96.png">
       </div>
-      <div class="index-tab-item icon-rule" @click="bindTab('../my-rule/main')">
-        <img src="https://gw.alicdn.com/tfs/TB1QrFHmSzqK1RjSZFHXXb3CpXa-91-100.png" alt>
+      <div class="index-tab-item icon-scan" @click="bindTab('../scan/main')">
+        <img src="https://gw.alicdn.com/tfs/TB1isa6v3HqK1RjSZFkXXX.WFXa-104-96.png" alt>
+      </div>
+      <div class="index-tab-item icon-quiz" @click="bindTab('../quiz/main')">
+      <!-- <div class="index-tab-item icon-quiz" @click="bindTab('../developing/main')"> -->
+        <img src="https://gw.alicdn.com/tfs/TB1OOfmv4jaK1RjSZKzXXXVwXXa-104-96.png" alt>
       </div>
       <div class="index-tab-item icon-my" @click="bindTab('../my/main')">
-        <img src="https://gw.alicdn.com/tfs/TB1TXlImMHqK1RjSZFgXXa7JXXa-92-99.png" alt>
+        <img src="https://gw.alicdn.com/tfs/TB1q8Tmv4jaK1RjSZKzXXXVwXXa-105-95.png" alt>
       </div>
       <div class="index-tab-line"></div>
     </div>
@@ -46,50 +43,25 @@
           class="scroll-title-text"
         >
         <img
-          src="https://gw.alicdn.com/tfs/TB1jUCamRLoK1RjSZFuXXXn0XXa-343-214.png"
+          src="https://gw.alicdn.com/tfs/TB1CQ53v7voK1RjSZFNXXcxMVXa-343-214.png"
           class="scroll-title-body"
         >
       </div>
       <div class="spot">
         <div
           class="spot-item"
-          :class="activeIndex == 1?'active':''"
-          id="spot1"
-          :style="{top:firstY+'%'}"
-        >
-          <div @click="firstSpot">1</div>
-          <div class="spot-item-tri" v-if="activeIndex == 1"></div>
-          <div
-            class="spot-item-window"
-            :style="{right:calcRight+'rpx'}"
-            v-if="activeIndex == 1"
-            @click="goDetail"
-          >
-            <img
-              class="spot-item-window-pic"
-              :src="prefix + currentSpot.spot_coverurl"
-              v-if="currentSpot.spot_coverurl"
-            >
-            <div class="spot-item-window-text">
-              <div class="spot-item-window-title">{{currentSpot.spot_title}}</div>
-              <div class="spot-item-window-desc">{{currentSpot.spot_describe}}</div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="spot-item"
           v-for="(item,index) in fullSpot"
           :key="index"
-          :class="activeIndex == index+2?'active':''"
+          :class="activeIndex == index+1?'active':''"
           :id="'spot'+item.num"
           :style="{top:item.y+'%'}"
         >
           <div @click="chooseSpot(item,index)">{{item.num}}</div>
-          <div class="spot-item-tri" v-if="activeIndex == index+2"></div>
+          <div class="spot-item-tri" v-if="activeIndex == index+1"></div>
           <div
             class="spot-item-window"
             :style="{right:calcRight+'rpx'}"
-            v-if="activeIndex == index+2"
+            v-if="activeIndex == index+1"
             @click="goDetail"
           >
             <img
@@ -104,19 +76,24 @@
           </div>
         </div>
       </div>
-      <!-- <img src="https://gw.alicdn.com/tfs/TB1KDtrqQvoK1RjSZPfXXXPKFXa-565-9495.png" mode="widthFix" class="scroll-road"> -->
-      <img
-        src="https://gw.alicdn.com/tfs/TB1IvF1mSzqK1RjSZFHXXb3CpXa-580-9295.png"
+      <img src="https://gw.alicdn.com/tfs/TB1HJvXv4TpK1RjSZFGXXcHqFXa-519-6810.png" class="scroll-road">
+      <!-- <img
+        src="https://gw.alicdn.com/tfs/TB1_D55vYvpK1RjSZFqXXcXUVXa-469-6810.png"
         mode="widthFix"
         class="scroll-road"
-      >
+      > -->
       <img
-        src="https://gw.alicdn.com/tfs/TB1xbXBmSzqK1RjSZFpXXakSXXa-532-8080.png"
+        src="https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png"
+        class="scroll-bg"
+        @load="finishLoadImg"
+      >
+      <!-- <img
+        src="https://gw.alicdn.com/tfs/TB1VnYrv4naK1RjSZFtXXbC2VXa-640-6997.png"
         mode="widthFix"
         class="scroll-bg"
         style="height: 6316px;"
         @load="finishLoadImg"
-      >
+      > -->
     </scroll-view>
     <div class="cover" @click="showRoadSelect = false" v-if="showRoadSelect"></div>
     <div class="modal" v-if="showRoadSelect">
@@ -209,19 +186,16 @@ export default {
 
   computed: {
     bodyHeight() {
-      let l = this.fullSpot.length;
-      let full_h,
-        full_s = 89;
-      full_h = 940;
+      let full_h;
+      full_h = 620;
       if (this.isIPX) {
-        full_h = 780;
+        full_h = 444;
       } else if (this.isIPXS) {
-        full_h = 780;
+        full_h = 444;
       } else if (this.isIP5) {
-        full_h = 970;
+        full_h = 545;
       }
-      let h = parseInt(l * full_h / full_s);
-      console.log("h", h);
+      let h = parseInt(full_h);
       return `${h}%`;
     },
     margin() {
@@ -231,9 +205,6 @@ export default {
       return `7.37%`;
     },
     calcRight() {
-      if (this.activeIndex == 1) {
-        return -50;
-      }
       const a = this.activeIndex % 6;
       switch (a) {
         case 0:
@@ -387,9 +358,8 @@ export default {
       let process = data => {
         this.spotList = storageData;
         this.currentSpot = storageData[0];
-        this.firstY = this._fy(1);
         this.fullSpot.length = 0;
-        for (let i = 2; i <= data.length; i++) {
+        for (let i = 1; i <= data.length; i++) {
           let item = { num: i, y: this._fy(i) };
           this.fullSpot.push(item);
         }
@@ -428,7 +398,7 @@ export default {
      */
     _fx(x) {
       let dict = this._getMarginXDict();
-      return dict[(x + 1) % 6];
+      return dict[(x) % 6];
     },
     _getMarginXDict() {
       return [20, 30, 40, 50];
@@ -468,7 +438,7 @@ export default {
     _getMarginYDict() {
       return [
         // 0.8, 六边形高度增加，微调一下
-        0.2,
+        4,
         7,
         13.2,
         19.5,
@@ -539,91 +509,27 @@ export default {
 .container {
   position: relative;
   overflow: hidden;
+  height: 8186rpx;
 }
 .spot {
   width: 100%;
   position: absolute;
   height: 100%;
   // top: 2.8%;
-  &-first {
-    position: relative;
-    z-index: 2;
-    width: 70rpx;
-    height: 82rpx;
-    line-height: 82rpx;
-    text-align: center;
-    color: #fff;
-    font-size: 34rpx;
-    background: url("https://gw.alicdn.com/tfs/TB1LC9gmH2pK1RjSZFsXXaNlXXa-60-70.png")
-      no-repeat center/100%;
-    margin-bottom: 7%;
-    margin-left: 54%;
-    &-window {
-      width: 522rpx;
-      height: 176rpx;
-      border-bottom: 1px solid #c7c7c7;
-      background: url("https://gw.alicdn.com/tfs/TB1.crTvQvoK1RjSZFNXXcxMVXa-500-168.png")
-        no-repeat center/contain;
-      position: absolute;
-      bottom: -180rpx;
-      z-index: 30;
-      display: flex;
-      &-pic {
-        width: 136rpx;
-        height: 134rpx;
-        background: #fff;
-        margin: 12rpx 12rpx 0 32rpx;
-      }
-      &-text {
-        width: 280rpx;
-        display: flex;
-        flex-direction: column;
-        color: #101010;
-        text-align: left;
-        overflow: hidden;
-      }
-      &-title {
-        margin-top: 45rpx;
-        font-size: 28rpx;
-        line-height: 40rpx;
-        white-space: nowrap;
-      }
-      &-desc {
-        font-size: 20rpx;
-        color: #6f6f6f;
-        line-height: 30rpx;
-      }
-    }
-    &-tri {
-      width: 52rpx;
-      height: 30rpx;
-      background: url("https://gw.alicdn.com/tfs/TB1C0d3nwHqK1RjSZFkXXX.WFXa-181-96.png")
-        no-repeat center/cover;
-      position: absolute;
-      bottom: -36rpx;
-      left: 0;
-      right: 0;
-      margin: auto;
-      z-index: 31;
-      transform: rotate(180deg);
-    }
-  }
-  &-first.active,
   &-item.active {
     position: relative;
-    background: url("https://gw.alicdn.com/tfs/TB1b7gKnmrqK1RjSZK9XXXyypXa-60-68.png")
+    background: url("https://gw.alicdn.com/tfs/TB1k55YvYPpK1RjSZFFXXa5PpXa-72-72.png")
       no-repeat center/100%;
   }
-  &-first.active:after,
   &-item.active:after {
     content: "";
     width: 28rpx;
     height: 24rpx;
     display: block;
     position: absolute;
-    right: 0;
-    top: 0;
-    background: url("https://gw.alicdn.com/tfs/TB1.uXenxnaK1RjSZFBXXcW7VXa-28-24.png")
+    right: -10rpx;
+    top: 15rpx;
+    background: url("https://gw.alicdn.com/tfs/TB1yEvqv5LaK1RjSZFxXXamPFXa-28-24.png")
       no-repeat center/100%;
   }
   &-item {
@@ -636,7 +542,7 @@ export default {
     text-align: center;
     color: #fff;
     font-size: 34rpx;
-    background: url("https://gw.alicdn.com/tfs/TB1LC9gmH2pK1RjSZFsXXaNlXXa-60-70.png")
+    background: url("https://gw.alicdn.com/tfs/TB1yx12v5rpK1RjSZFhXXXSdXXa-72-72.png")
       no-repeat center/100%;
     margin-bottom: 7.27%;
     &-window {
@@ -695,22 +601,22 @@ export default {
     }
   }
   &-item:nth-of-type(6n + 2) {
-    margin-left: 68%;
+    margin-left: 50%;
   }
   &-item:nth-of-type(6n + 3) {
-    margin-left: 52%;
-  }
-  &-item:nth-of-type(6n + 1) {
-    margin-left: 55.3%;
-  }
-  &-item:nth-of-type(6n + 4) {
-    margin-left: 35%;
-  }
-  &-item:nth-of-type(6n) {
     margin-left: 38%;
   }
+  &-item:nth-of-type(6n + 1) {
+    margin-left: 64%;
+  }
+  &-item:nth-of-type(6n + 4) {
+    margin-left: 18%;
+  }
+  &-item:nth-of-type(6n) {
+    margin-left: 50%;
+  }
   &-item:nth-of-type(6n + 5) {
-    margin-left: 21%;
+    margin-left: 35%;
   }
 }
 .scroll {
@@ -751,16 +657,17 @@ export default {
       left: 0;
       right: 0;
       margin: auto;
-      border: 12rpx solid #292770;
+      border: 12rpx solid #2b9f62;
     }
   }
   &-road {
-    width: 90%;
     position: absolute;
-    top: 2%;
+    top: 2.7%;
+    height: 7967rpx;
   }
   &-bg {
     width: 100%;
+    height: 8186rpx;
   }
 }
 .index-tab {
@@ -774,7 +681,7 @@ export default {
   z-index: 21;
   &-item {
     width: 120rpx;
-    height: 130rpx;
+    height: 110rpx;
     margin-bottom: 36rpx;
     position: relative;
     z-index: 23;
@@ -782,13 +689,13 @@ export default {
   &-line {
     width: 1px;
     height: 90%;
-    background-image: url("https://gw.alicdn.com/tfs/TB1B10KmFzqK1RjSZSgXXcpAVXa-2-762.png");
+    background-image: url("https://gw.alicdn.com/tfs/TB1KyaQv9rqK1RjSZK9XXXyypXa-1-780.png");
     background-repeat: repeat-y;
     background-size: cover;
     background-position: center;
     position: absolute;
     top: 10rpx;
-    right: 39rpx;
+    right: 44rpx;
     z-index: 22;
   }
   img {
@@ -861,8 +768,5 @@ export default {
 }
 .rotate {
   transform: rotate(180deg);
-}
-#spot1 {
-  margin-left: 52%;
 }
 </style>

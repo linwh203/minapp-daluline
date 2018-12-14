@@ -6,7 +6,7 @@
         <div class="nav-content">
           <div class="nav-item" :class="audioOff?'audio':'pause'" @click="playAudio"></div>
           <div class="point"></div>
-          <div class="nav-item video" @click="goVideo"></div>
+          <div class="nav-item" :class="lang=='ch'?'chinese':'english'" @click="lang=='ch'?lang='en':lang='ch'"></div>
           <div class="point"></div>
           <div class="nav-item note" v-if="false"></div>
           <!-- <button class="nav-item share" style="margin-left:0;margin-right:0;" open-type="share"></button> -->
@@ -18,6 +18,7 @@
       </div>
       <div class="nav-border"></div>
     </div>
+    <div class="bigtitle">123</div>
     <div class="main" v-for="(item,index) in articleData" :key="index">
       <div class="article" v-if="item">
         <div v-if="item.author">
@@ -58,7 +59,7 @@ export default {
       fromMap: false,
       showSub: false,
       innerAudioContext: null,
-      videoUrl: "",
+      lang: "ch",
       audioOff: true,
       audioUrl: "",
       mainPic: "",
@@ -277,7 +278,7 @@ export default {
 }
 .container {
   position: relative;
-  background: url("https://gw.alicdn.com/tfs/TB1vzW6nxjaK1RjSZKzXXXVwXXa-640-1142.png")
+  background: url("https://gw.alicdn.com/tfs/TB1GOmAvVYqK1RjSZLeXXbXppXa-640-1881.png")
     repeat-y top/cover;
   color: #fff;
   padding: 20rpx;
@@ -334,14 +335,24 @@ export default {
     height: 28rpx;
   }
 }
+.bigtitle{
+  position: absolute;
+  left: 4rpx;right: 4rpx;margin: auto;
+  top: 138rpx;
+  height: 110rpx;
+  color:#095d31;
+  font-size: 36rpx;
+  font-weight: bold;
+  line-height: 100rpx;
+  text-align: center;
+  background: url('https://gw.alicdn.com/tfs/TB1fuG0v3HqK1RjSZFkXXX.WFXa-630-94.png') no-repeat top/cover;
+}
 .main {
-  margin-top: -18rpx;
+  margin-top: 0rpx;
 }
 .article {
-  border: 8rpx solid #fff;
-  padding: 20rpx;
+  padding: 16rpx;
   font-size: 36rpx;
-  background-color: rgb(23, 25, 74);
   &-author {
     text-align: center;
     margin: 40rpx 0 10rpx;
@@ -409,12 +420,12 @@ export default {
     background: #fff;
   }
   .audio {
-    background: url("https://gw.alicdn.com/tfs/TB1rngUnAvoK1RjSZPfXXXPKFXa-91-83.png")
-      no-repeat center/cover;
+    background: url("https://gw.alicdn.com/tfs/TB1gKqwv3TqK1RjSZPhXXXfOFXa-73-78.png")
+      no-repeat center/contain;
   }
   .pause {
-    background: url("https://gw.alicdn.com/tfs/TB1A5HfnYvpK1RjSZPiXXbmwXXa-91-84.png")
-      no-repeat center/cover;
+    background: url("https://gw.alicdn.com/tfs/TB1.ayEv5rpK1RjSZFhXXXSdXXa-71-78.png")
+      no-repeat center/contain;
   }
   // .audio:after,.video:after,.note:after,.pause:after{
   //   content:'';
@@ -433,10 +444,15 @@ export default {
     right: -26rpx;
     top: 44rpx;
   }
-  .video {
+  .english {
     // margin-left: 6%;
-    background: url("https://gw.alicdn.com/tfs/TB1h8sSnwHqK1RjSZJnXXbNLpXa-92-83.png")
-      no-repeat center/cover;
+    background: url("https://gw.alicdn.com/tfs/TB1c2i4v4YaK1RjSZFnXXa80pXa-79-78.png")
+      no-repeat center/contain;
+  }
+  .chinese {
+    // margin-left: 6%;
+    background: url("https://gw.alicdn.com/tfs/TB1wmyZv3HqK1RjSZFkXXX.WFXa-79-78.png")
+      no-repeat center/contain;
   }
   .note {
     // margin-left: 6%;
@@ -445,8 +461,8 @@ export default {
   }
   .share {
     // margin-left: 6%;
-    background: url("https://gw.alicdn.com/tfs/TB1B.35nxYaK1RjSZFnXXa80pXa-91-83.png")
-      no-repeat center/cover;
+    background: url("https://gw.alicdn.com/tfs/TB13iiIv7zoK1RjSZFlXXai4VXa-82-78.png")
+      no-repeat center/contain;
     transform: translateX(12rpx);
   }
   &-border {
