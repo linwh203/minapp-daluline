@@ -24,8 +24,9 @@ export const config = {
   // prefix: 'http://39.106.120.41:8498',
   // base: 'http://39.106.120.41:8498/GuideWechat/',
   lineId: 'F8F6CA62-2B02-4A09-AB50-0575321B0C89',
-  appId: 'wx64104ee36c863058',
-  appSecret: '1b3f1d4dc4d895247c60d0d426aca413'
+  appId: 'wx2524b56d9fcdc87a',
+  // appId: 'wx64104ee36c863058',
+  appSecret: 'd38753fbed0e7f203aeab48207b0d3c7'
 }
 //儿童线
 // AppID：wxb6db5e06d4a0078a

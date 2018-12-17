@@ -290,9 +290,9 @@ export default {
       this.tab1 = false;
     },
     chooseSpot(item, index) {
-      this.activeIndex == index + 2
+      this.activeIndex == index + 1
         ? (this.activeIndex = -1)
-        : (this.activeIndex = index + 2);
+        : (this.activeIndex = index + 1);
       this.currentSpot = this.spotList[this.activeIndex - 1];
     },
     firstSpot() {
@@ -359,12 +359,12 @@ export default {
         this.spotList = storageData;
         this.currentSpot = storageData[0];
         this.fullSpot.length = 0;
-        for (let i = 1; i <= data.length; i++) {
-          let item = { num: i, y: this._fy(i) };
+        for (let i = 0; i <= data.length; i++) {
+          let item = { num: i+1, y: this._fy(i) };
           this.fullSpot.push(item);
         }
       };
-      const storageData = wx.getStorageSync("NatureList");
+      const storageData = wx.getStorageSync("NatureList").slice(0,63);
       if (storageData) {
         process(storageData);
         return;
@@ -379,7 +379,7 @@ export default {
         success: res => {
           // console.log(res)
           // self.GLOBAL.spot_list = res.data.data
-          const data = res.data.data;
+          const data = res.data.data.slice(0,63);
           this.setStorage("NatureList", data);
           process(data);
         },
@@ -437,23 +437,18 @@ export default {
     },
     _getMarginYDict() {
       return [
-        // 0.8, 六边形高度增加，微调一下
         4,
-        7,
-        13.2,
-        19.5,
-        25.8,
-        32.05,
-        38.4,
-        44.5,
-        50.9,
-        57.1,
-        63.45,
-        69.7,
-        76,
-        82.25,
-        88.6,
-        94.75
+        12.94,
+        21.88,
+        30.82,
+        39.76,
+        48.7,
+        57.64,
+        66.58,
+        75.52,
+        84.46,
+        93.8,
+        100
       ];
     }
   },
@@ -604,7 +599,7 @@ export default {
     margin-left: 50%;
   }
   &-item:nth-of-type(6n + 3) {
-    margin-left: 38%;
+    margin-left: 32%;
   }
   &-item:nth-of-type(6n + 1) {
     margin-left: 64%;
@@ -616,7 +611,7 @@ export default {
     margin-left: 50%;
   }
   &-item:nth-of-type(6n + 5) {
-    margin-left: 35%;
+    margin-left: 32%;
   }
 }
 .scroll {
