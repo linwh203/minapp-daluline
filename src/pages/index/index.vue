@@ -35,6 +35,16 @@
       </div>
       <div class="index-tab-line"></div>
     </div>
+    <scroll-view scroll-x style="width: 100%" class="navi-scroll">
+      <div class="navi">
+        <div class="navi-item">全部</div>
+        <div class="navi-item">第一段 新大-七星湾</div>
+        <div class="navi-item">第二段 七星湾-桔钓沙段</div>
+        <div class="navi-item">第三段 桔钓沙-杨梅坑段</div>
+        <div class="navi-item">第四段 杨梅坑-过店段</div>
+        <div class="navi-item">第五段 过店-鹿咀段</div>
+      </div>
+    </scroll-view>
     <scroll-view scroll-y class="scroll" :scroll-into-view="toView">
       <div class="scroll-title">
         <img :src="titleSrc" class="scroll-title-pic">
@@ -504,7 +514,30 @@ export default {
 .container {
   position: relative;
   overflow: hidden;
-  height: 8186rpx;
+  height: 8264rpx;
+}
+.navi{
+  height: 78rpx;
+  background: #fff;
+  color:#101010;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 28rpx;
+  flex-direction: row;
+  width: 224%;
+  &-item{
+    margin-left:36rpx;
+  }
+  &-scroll{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 40;
+  }
+  .active{
+    color:#2b9f62;
+  }
 }
 .spot {
   width: 100%;
@@ -616,6 +649,7 @@ export default {
 }
 .scroll {
   position: relative;
+  top:78rpx;
   &-title {
     width: 402rpx;
     height: 234rpx;
@@ -667,7 +701,7 @@ export default {
 }
 .index-tab {
   position: fixed;
-  top: 15rpx;
+  top: 93rpx;
   right: 20rpx;
   display: flex;
   flex-direction: column;
