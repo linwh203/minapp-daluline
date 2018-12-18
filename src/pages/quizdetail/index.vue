@@ -43,7 +43,7 @@
       </div>
     </div>
     <div class="quiz-success" v-if="quizSuccess">
-      <img class="resultIcon" src="https://gw.alicdn.com/tfs/TB1iq1VnMTqK1RjSZPhXXXfOFXa-328-251.png">
+      <img class="resultIcon" src="https://gw.alicdn.com/tfs/TB1nZLPwHPpK1RjSZFFXXa5PpXa-330-253.png">
       <div class="quiz-result">
         <img class="coin" src="https://gw.alicdn.com/tfs/TB1fLeZnQvoK1RjSZFwXXciCFXa-43-44.png">  
         <span>+ {{bonus}}</span>
@@ -53,7 +53,7 @@
        <div class="quiz-result-btn-btm" @click="bindTab('../my-reward/main')">查看成就</div>
     </div>
     <div class="quiz-fail" v-if="quizFail">
-      <img class="resultIcon" src="https://gw.alicdn.com/tfs/TB1Lg9UnHPpK1RjSZFFXXa5PpXa-328-251.png">
+      <img class="resultIcon" src="https://gw.alicdn.com/tfs/TB10SvWwQvoK1RjSZFDXXXY3pXa-329-251.png">
       <div class="quiz-result">
         <img class="coin" src="https://gw.alicdn.com/tfs/TB1fLeZnQvoK1RjSZFwXXciCFXa-43-44.png">  
         <span>+ 0</span>
@@ -382,7 +382,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  background: url("https://gw.alicdn.com/tfs/TB1ASuUnMHqK1RjSZJnXXbNLpXa-640-1084.png")
+  background: url("https://gw.alicdn.com/tfs/TB1zPsawNnaK1RjSZFtXXbC2VXa-640-1084.png")
     no-repeat top/100% 100%;
   display: flex;
   flex-direction: column;
@@ -407,7 +407,7 @@ export default {
   display: flex;
   justify-content:center;
   margin-top: 28rpx;
-  color:#292770;
+  color:#0e7441;
   &-mid {
     width: 600rpx;
     height: 64rpx;
@@ -426,7 +426,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color:#292770;
+    color:#0e7441;
     &-item {
       width: 100%;
       height: 80rpx;
@@ -456,11 +456,11 @@ export default {
       }
     }
     &-item.rightAnswer{
-      background: #6998cc;
+      background: #54b431;
       color:#fff;
     }
     &-item.wrongAnswer{
-      background: #a8368e;
+      background: #e74e3d;
       color:#fff;
     }
     &-item:nth-last-of-type(1) {
@@ -496,7 +496,7 @@ export default {
   background: url('https://gw.alicdn.com/tfs/TB1IMx.n7voK1RjSZFNXXcxMVXa-599-60.png') no-repeat top/cover;
 }
 .quiz-result-btn-top{
-  color:#292770;
+  color:#0e7441;
   width: 380rpx;
   height: 80rpx;
   line-height: 80rpx;
@@ -538,7 +538,7 @@ export default {
   height: 100%;
   position: relative;
   padding:20rpx;
-  background: url('https://gw.alicdn.com/tfs/TB1.nJ1nVzqK1RjSZFvXXcB7VXa-640-1008.png') no-repeat top/cover;
+  background: url('https://gw.alicdn.com/tfs/TB1YkvxwMTqK1RjSZPhXXXfOFXa-640-1008.png') no-repeat top/cover;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -617,14 +617,14 @@ export default {
   z-index:81;
   top: 20%;
   left: 0;right: 0;margin:auto;
-  background: url('https://gw.alicdn.com/tfs/TB1RLqUnFzqK1RjSZFvXXcB7VXa-460-700.png') no-repeat top/cover;
+  background: url('https://gw.alicdn.com/tfs/TB1cxzYwSzqK1RjSZFHXXb3CpXa-460-700.png') no-repeat top/cover;
   &-btn{
     width: 340rpx;
     height: 80rpx;
     position: absolute;
     bottom: 100rpx;
     left: 0;right: 0;margin: auto;
-    background: url('https://gw.alicdn.com/tfs/TB1Rn9UnHvpK1RjSZPiXXbmwXXa-340-80.png') no-repeat top/cover;
+    background: url('https://gw.alicdn.com/tfs/TB1p4r5wMHqK1RjSZFEXXcGMXXa-340-80.png') no-repeat top/cover;
   }
 }
 .endLayer{
@@ -634,6 +634,6 @@ export default {
   z-index:81;
   top: 20%;
   left: 0;right: 0;margin:auto;
-  background: url('https://gw.alicdn.com/tfs/TB1tIq0nQvoK1RjSZFDXXXY3pXa-460-700.png') no-repeat top/cover;
+  background: url('https://gw.alicdn.com/tfs/TB1nUYYwMHqK1RjSZFgXXa7JXXa-460-700.png') no-repeat top/cover;
 }
 </style>

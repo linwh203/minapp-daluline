@@ -244,7 +244,7 @@ export default {
     this.loadDetail();
   },
   onShareAppMessage(result) {
-    let title = "青谷研习径";
+    let title = "鹿咀自然课堂步道";
     let path = "/pages/list/main?spot_index=" + this.activeIndex;
     let imageUrl = "../../assets/list-pic-1.png";
     // let desc = '这里是描述哦'
@@ -348,7 +348,9 @@ export default {
   background: url('https://gw.alicdn.com/tfs/TB1fuG0v3HqK1RjSZFkXXX.WFXa-630-94.png') no-repeat top/cover;
 }
 .main {
-  margin-top: 0rpx;
+  margin-top: 40rpx;
+  border: 9rpx solid #fff;
+  background: rgba(0,0,0,.4);
 }
 .article {
   padding: 16rpx;

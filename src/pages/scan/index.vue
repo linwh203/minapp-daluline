@@ -11,20 +11,20 @@
     <div class="index-tab" style="color:#fff;font-size:24rpx;">
       <div class="index-tab-left">
         <img
-          src="https://gw.alicdn.com/tfs/TB1Kbp8nHvpK1RjSZFqXXcXUVXa-80-80.png"
+          src="https://gw.alicdn.com/tfs/TB1_K2GwQPoK1RjSZKbXXX1IXXa-90-90.png"
           @click="showDesc = !showDesc"
         >
         <p>使用说明</p>
       </div>
       <div class="index-tab-mid">
         <img
-          src="https://gw.alicdn.com/tfs/TB1dCGdnNYaK1RjSZFnXXa80pXa-120-120.png"
+          src="https://gw.alicdn.com/tfs/TB1LBjDwIbpK1RjSZFyXXX_qFXa-120-120.png"
           @click="takePhoto"
         >
         <p>拍一拍</p>
       </div>
       <div class="index-tab-right">
-        <img src="https://gw.alicdn.com/tfs/TB1PDp6nQvoK1RjSZPfXXXPKFXa-80-80.png" @click="reverse">
+        <img src="https://gw.alicdn.com/tfs/TB1w9HRwNjaK1RjSZFAXXbdLFXa-90-90.png" @click="reverse">
         <p>镜头切换</p>
       </div>
     </div>

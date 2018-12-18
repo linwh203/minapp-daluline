@@ -195,7 +195,7 @@ export default {
   width: 700rpx;
   line-height: 90rpx;
   text-align: center;
-  background: #292770;
+  background: #2b9f62;
   border-radius: 18rpx;
   margin: 70rpx auto;
   color: #fff;

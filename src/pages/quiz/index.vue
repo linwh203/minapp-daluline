@@ -22,7 +22,7 @@
       </div>
       <div class="index-list-item">
         <div class="index-list-item-img" @click="startQuiz(2)">
-          <img src="https://gw.alicdn.com/tfs/TB1Wx5XnNTpK1RjSZFMXXbG_VXa-608-208.png">
+          <img src="https://gw.alicdn.com/tfs/TB1V1LFwFYqK1RjSZLeXXbXppXa-608-208.png">
           <div class="index-list-item-lock" v-if="score<1">
             <img src="https://gw.alicdn.com/tfs/TB19UOdnRLoK1RjSZFuXXXn0XXa-23-29.png">
           </div>
@@ -203,7 +203,7 @@ export default {
     // this.userCode = wx.getStorageSync('userCode');
   },
   onShareAppMessage(result) {
-    let title = "青谷研习径";
+    let title = "鹿咀自然课堂步道";
     let path = "/pages/index/main";
     let imageUrl =
       "https://gw.alicdn.com/tfs/TB1uLyAnxjaK1RjSZKzXXXVwXXa-80-80.png";
@@ -229,7 +229,7 @@ export default {
 <style scoped lang="less">
 .top {
   height: 270rpx;
-  background: #6998cc;
+  background: #36ab70;
   border-radius: 10rpx;
   margin: 0 6rpx 20rpx;
   display: flex;
@@ -282,7 +282,7 @@ export default {
   position: absolute;
   right: 0;
   top: 80rpx;
-  background: url("https://gw.alicdn.com/tfs/TB1m0X7nHPpK1RjSZFFXXa5PpXa-113-60.png")
+  background: url("https://gw.alicdn.com/tfs/TB14NYGwHvpK1RjSZPiXXbmwXXa-113-60.png")
     no-repeat top/cover;
   &::after {
     border: none;
@@ -291,10 +291,11 @@ export default {
 .container {
   position: relative;
   padding: 20rpx;
-  background: url("https://gw.alicdn.com/tfs/TB1.nJ1nVzqK1RjSZFvXXcB7VXa-640-1008.png")
+  background: url("https://gw.alicdn.com/tfs/TB1YkvxwMTqK1RjSZPhXXXfOFXa-640-1008.png")
     no-repeat top/cover;
 }
 .index-list {
+  background: #0e7441;
   width: 100%;
   img {
     width: 100%;
@@ -344,7 +345,7 @@ export default {
   left: 0;
   right: 0;
   margin: auto;
-  background: url("https://gw.alicdn.com/tfs/TB1.U9SnMHqK1RjSZJnXXbNLpXa-460-700.png")
+  background: url("https://gw.alicdn.com/tfs/TB18CbLwQvoK1RjSZFDXXXY3pXa-460-700.png")
     no-repeat top/cover;
 }
 .shareLayer {
@@ -356,7 +357,7 @@ export default {
   left: 0;
   right: 0;
   margin: auto;
-  background: url("https://gw.alicdn.com/tfs/TB1YThon4TpK1RjSZR0XXbEwXXa-460-700.png")
+  background: url("https://gw.alicdn.com/tfs/TB1_QLOwIfpK1RjSZFOXXa6nFXa-460-700.png")
     no-repeat top/contain;
 }
 .shareBtn {
@@ -367,13 +368,11 @@ export default {
   margin: auto;
   width: 360rpx;
   height: 85rpx;
-  background: url("https://gw.alicdn.com/tfs/TB1qxG6nNYaK1RjSZFnXXa80pXa-340-80.png")
-    no-repeat top/cover;
 }
 .close {
   width: 70rpx;
   height: 142rpx;
-  background: url("https://gw.alicdn.com/tfs/TB14yqPnNTpK1RjSZFKXXa2wXXa-60-132.png")
+  background: url("https://gw.alicdn.com/tfs/TB1bzrMwMHqK1RjSZJnXXbNLpXa-60-132.png")
     no-repeat top/cover;
   position: absolute;
   right: 0;

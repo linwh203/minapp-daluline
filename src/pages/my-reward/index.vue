@@ -236,7 +236,7 @@ export default {
 <style scoped lang="less">
 .top {
   height: 270rpx;
-  background: #292770;
+  background: #2b9f62;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -247,7 +247,7 @@ export default {
   height: 124rpx;
   display: flex;
   align-items: center;
-  background: #292770;
+  background: #2b9f62;
   &-item {
     width: 49%;
     color: #fff;
@@ -278,7 +278,7 @@ export default {
   font-size: 30rpx;
 }
 .share {
-  color: #fff;
+  color: #2b9f62;
   font-size: 24rpx;
   padding-left: 66rpx;
   width: 60rpx;
@@ -287,7 +287,7 @@ export default {
   position: absolute;
   right: 0;
   top: 80rpx;
-  background: url("https://gw.alicdn.com/tfs/TB1f.h6qQvoK1RjSZFwXXciCFXa-114-60.png")
+  background: url("https://gw.alicdn.com/tfs/TB1HBfVwMTqK1RjSZPhXXXfOFXa-114-60.png")
     no-repeat top/cover;
 }
 .container {
@@ -312,7 +312,7 @@ export default {
   left: 0;
   right: 0;
   margin: auto;
-  background: url("https://gw.alicdn.com/tfs/TB16p9nqNYaK1RjSZFnXXa80pXa-460-700.png")
+  background: url("https://gw.alicdn.com/tfs/TB1Umz2wNTpK1RjSZR0XXbEwXXa-460-700.png")
     no-repeat top/cover;
   &-head {
     font-size: 30rpx;
@@ -340,7 +340,7 @@ export default {
     line-height: 90rpx;
     text-align: center;
     color: #fff;
-    background: #292770;
+    background: #2b9f62;
     border-radius: 20rpx;
     position: absolute;
     bottom: 60rpx;
@@ -374,7 +374,7 @@ export default {
       margin: 20rpx 0;
       width: 340rpx;
       height: 90rpx;
-      background: url("https://gw.alicdn.com/tfs/TB1ZHqcqH2pK1RjSZFsXXaNlXXa-290-80.png")
+      background: url("https://gw.alicdn.com/tfs/TB1.0L5wOrpK1RjSZFhXXXSdXXa-290-80.png")
         no-repeat center/cover;
       img {
         width: 40rpx;
@@ -387,7 +387,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #292770;
+    background: #0e7441;
     padding: 25rpx 38rpx;
     color: #fff;
     border-radius: 10rpx;
@@ -418,7 +418,7 @@ export default {
           height: 60rpx;
           line-height: 60rpx;
           text-align: center;
-          background: #a8368e;
+          background: #e74e3d;
           border-radius: 10rpx;
           font-size: 24rpx;
           margin-right: 60rpx;
