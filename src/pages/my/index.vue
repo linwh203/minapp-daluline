@@ -17,9 +17,9 @@
         </div>
       </div>
       <div class="my-tab-body">
-        <div class="my-tab-body-item" @click="bindTab('../my-msg/main')">
+        <div class="my-tab-body-item" @click="bindTab('../my-note/main')">
           <img src="https://gw.alicdn.com/tfs/TB1sP_WwH2pK1RjSZFsXXaNlXXa-71-60.png" class="my-tab-body-item-icon"/>
-          <div class="my-tab-body-item-name">消息中心</div>
+          <div class="my-tab-body-item-name">观察笔记</div>
         </div>
         <div class="my-tab-body-item" @click="bindTab('../my-statement/main')">
           <img src="https://gw.alicdn.com/tfs/TB1inTWwH2pK1RjSZFsXXaNlXXa-68-60.png" class="my-tab-body-item-icon"/>

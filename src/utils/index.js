@@ -18,12 +18,28 @@ export function formatTime (date) {
   return `${t1} ${t2}`
 }
 
+export const formatDate = (time,YYYY) => {
+  let t = parseInt(time);
+  let d=new Date(t),
+      year = d.getFullYear(),
+      month = d.getMonth() + 1,
+      date = d.getDate(),
+      hour = d.getHours(),
+      minute = d.getMinutes(),
+      second = d.getSeconds();
+  if(YYYY){
+    return year + "-" + month + "-" + date + " " + hour + ":" + minute;
+  }else{
+    return month + "月" + date + "日" + hour + ":" + minute;
+  }
+};
+
 export const config = {
-  prefix: 'https://etx.forestvisual.com',
-  base: 'https://etx.forestvisual.com/guidewechat/',
-  // prefix: 'http://39.98.47.219:8006',
-  // base: 'http://39.98.47.219:8006/GuideWechat/',
-  lineId: 'F8F6CA62-2B02-4A09-AB50-0575321B0C89',
+  // prefix: 'https://etx.forestvisual.com',
+  // base: 'https://etx.forestvisual.com/guidewechat/',
+  prefix: 'http://39.98.47.219:8006',
+  base: 'http://39.98.47.219:8006/GuideWechat/',
+  lineId: 'C20442B1-FC17-4369-8D03-27C7A7D0EB10',
   appId: 'wx2524b56d9fcdc87a',
   // appId: 'wx64104ee36c863058',
   appSecret: 'd38753fbed0e7f203aeab48207b0d3c7'

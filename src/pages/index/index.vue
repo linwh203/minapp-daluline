@@ -20,7 +20,7 @@
           v-if="isPlaying"
         >
       </div>
-      <div class="index-tab-item icon-video" @click="bindTab('../video/main')">
+      <div class="index-tab-item icon-video" @click="bindTab('../video-list/main')">
         <img src="https://gw.alicdn.com/tfs/TB1gTqYv9zqK1RjSZFHXXb3CpXa-104-96.png">
       </div>
       <div class="index-tab-item icon-scan" @click="bindTab('../scan/main')">
@@ -446,20 +446,8 @@ export default {
       return rst;
     },
     _getMarginYDict() {
-      return [
-        4,
-        12.94,
-        21.88,
-        30.82,
-        39.76,
-        48.7,
-        57.64,
-        66.58,
-        75.52,
-        84.46,
-        93.8,
-        100
-      ];
+      // 原尺寸 [5.02, 13.86, 22.71, 31.55, 40.4, 49.24, 58.09, 66.93, 75.78, 84.62, 93.47];
+      return [3.62, 12.46, 21.31, 29.85, 39.0, 47.84, 56.69, 65.53, 74.18, 83.02, 91.77, 101]; //微调后
     }
   },
   mounted() {
@@ -496,6 +484,17 @@ export default {
           this.isIPXS = true;
         }
       }
+    });
+    wx.request({
+      url: config.base + 'attraction/List', //开发者服务器接口地址",
+      data: {
+        lineId: config.lineId
+      }, //请求的参数",
+      method: 'GET',
+      dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
+      success: res => {console.log(res)},
+      fail: () => {},
+      complete: () => {}
     });
   },
   onReady() {
@@ -629,22 +628,22 @@ export default {
     }
   }
   &-item:nth-of-type(6n + 2) {
-    margin-left: 50%;
+    margin-left: 47%;
   }
   &-item:nth-of-type(6n + 3) {
-    margin-left: 32%;
+    margin-left: 28%;
   }
   &-item:nth-of-type(6n + 1) {
     margin-left: 64%;
   }
   &-item:nth-of-type(6n + 4) {
-    margin-left: 18%;
+    margin-left: 13%;
   }
   &-item:nth-of-type(6n) {
-    margin-left: 50%;
+    margin-left: 47%;
   }
   &-item:nth-of-type(6n + 5) {
-    margin-left: 32%;
+    margin-left: 28%;
   }
 }
 .scroll {

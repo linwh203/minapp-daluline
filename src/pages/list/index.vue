@@ -38,15 +38,6 @@
         <div class="writer-text" v-html="articleData[1].content"></div>
       </div> -->
     </div>
-    <div class="share-box" v-if="sharebox">
-      <div class="share-box-body">
-        <div class="share-box-body-item">
-          <button open-type="share" class="btn-share-origin"></button>
-          <img src="../../assets/icon-share-weixin.png" alt="">
-        </div>
-      </div>
-      <div class="share-box-close" @click="hideShareBox">取消</div>
-    </div>
   </div>
 </template>
 
@@ -219,6 +210,7 @@ export default {
     }
     this.getSpot(this.spotLine);
     this.innerAudioContext = wx.createInnerAudioContext();
+    
   },
   onHide() {
     this.audioOff = true;
