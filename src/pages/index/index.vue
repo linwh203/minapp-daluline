@@ -37,12 +37,12 @@
     </div>
     <scroll-view scroll-x style="width: 100%" class="navi-scroll">
       <div class="navi">
-        <div class="navi-item">全部</div>
-        <div class="navi-item">第一段 新大-七星湾</div>
-        <div class="navi-item">第二段 七星湾-桔钓沙段</div>
-        <div class="navi-item">第三段 桔钓沙-杨梅坑段</div>
-        <div class="navi-item">第四段 杨梅坑-过店段</div>
-        <div class="navi-item">第五段 过店-鹿咀段</div>
+        <div class="navi-item" :style="lineIndex==98?'color:#2b9f62':''" @click="toSmallLine(98)">全部</div>
+        <div class="navi-item" :style="lineIndex==0?'color:#2b9f62':''" @click="toSmallLine(0)">第一段 新大-七星湾</div>
+        <div class="navi-item" :style="lineIndex==1?'color:#2b9f62':''" @click="toSmallLine(1)">第二段 七星湾-桔钓沙段</div>
+        <div class="navi-item" :style="lineIndex==2?'color:#2b9f62':''" @click="toSmallLine(2)">第三段 桔钓沙-杨梅坑段</div>
+        <div class="navi-item" :style="lineIndex==3?'color:#2b9f62':''" @click="toSmallLine(3)">第四段 杨梅坑-过店段</div>
+        <div class="navi-item" :style="lineIndex==4?'color:#2b9f62':''" @click="toSmallLine(4)">第五段 过店-鹿咀段</div>
       </div>
     </scroll-view>
     <scroll-view scroll-y class="scroll" :scroll-into-view="toView">
@@ -87,70 +87,8 @@
         </div>
       </div>
       <img src="https://gw.alicdn.com/tfs/TB1HJvXv4TpK1RjSZFGXXcHqFXa-519-6810.png" class="scroll-road">
-      <!-- <img
-        src="https://gw.alicdn.com/tfs/TB1_D55vYvpK1RjSZFqXXcXUVXa-469-6810.png"
-        mode="widthFix"
-        class="scroll-road"
-      > -->
-      <img
-        src="https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png"
-        class="scroll-bg"
-        @load="finishLoadImg"
-      >
-      <!-- <img
-        src="https://gw.alicdn.com/tfs/TB1VnYrv4naK1RjSZFtXXbC2VXa-640-6997.png"
-        mode="widthFix"
-        class="scroll-bg"
-        style="height: 6316px;"
-        @load="finishLoadImg"
-      > -->
+      <img src="https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png" class="scroll-bg" @load="finishLoadImg">
     </scroll-view>
-    <div class="cover" @click="showRoadSelect = false" v-if="showRoadSelect"></div>
-    <div class="modal" v-if="showRoadSelect">
-      <div class="modal-tab">
-        <div class="modal-tab-title" @click="tab1 = !tab1">
-          <img
-            src="https://gw.alicdn.com/tfs/TB1uLyAnxjaK1RjSZKzXXXVwXXa-80-80.png"
-            class="modal-tab-title-logo"
-          >
-          <div class="modal-tab-title-text">
-            <div class="modal-tab-title-text-stage">第一段</div>
-            <div class="modal-tab-title-text-name">自然研习径</div>
-          </div>
-          <img
-            class="modal-tab-title-icon"
-            :class="tab1?'':'rotate'"
-            src="https://gw.alicdn.com/tfs/TB19EKcnpzqK1RjSZFvXXcB7VXa-22-25.png"
-          >
-        </div>
-        <!-- <div class="modal-tab-content" v-if="tab1"> -->
-        <div class="modal-tab-content" v-if="1">
-          <div
-            class="modal-tab-content-item"
-            v-for="(item,index) in natureList"
-            :key="index"
-            @click="toSmallLine(index)"
-          >{{item}}</div>
-        </div>
-      </div>
-      <div class="modal-tab">
-        <div class="modal-tab-title" @click="bindTab('../index-sg/main')">
-          <img
-            src="https://gw.alicdn.com/tfs/TB1WEmfnxTpK1RjSZFMXXbG_VXa-79-80.png"
-            class="modal-tab-title-logo"
-          >
-          <div class="modal-tab-title-text">
-            <div class="modal-tab-title-text-stage">第二段</div>
-            <div class="modal-tab-title-text-name">诗歌研习径</div>
-          </div>
-          <img
-            class="modal-tab-title-icon"
-            :class="tab2?'':'rotate'"
-            src="https://gw.alicdn.com/tfs/TB19EKcnpzqK1RjSZFvXXcB7VXa-22-25.png"
-          >
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -182,13 +120,7 @@ export default {
       showRoadSelect: false,
       tab1: false,
       tab2: false,
-      natureList: [
-        "滨海线研习段",
-        "二线关研习段",
-        "大岭古研习段",
-        "红花岭水库研习段",
-        "洞背村研习段"
-      ],
+      lineIndex:98,
       windowHeight: 0,
       firstY: 0
     };
@@ -223,13 +155,13 @@ export default {
           return -120;
         case 2:
           // 处女座说,必须调整,所以0改成-16
-          return -16;
+          return -82;
         case 3:
-          return -116;
+          return -216;
         case 4:
-          return -250;
+          return -340;
         case 5:
-          return -380;
+          return -360;
       }
     }
   },
@@ -273,22 +205,32 @@ export default {
         case 1:
           top = 0;
           this.activeIndex = 1;
+          this.lineIndex = 0;
           break;
         case 2:
-          top = this.isIP5 ? 1000 : 1100;
-          this.activeIndex = 20;
+          top = this.isIP5 ? 1600 : 1800;
+          this.activeIndex = 30;
+          this.lineIndex = 1;
           break;
         case 3:
-          top = this.isIP5 ? 1600 : 1800;
-          this.activeIndex = 32;
+          top = this.isIP5 ? 2000 : 2200;
+          this.activeIndex = 38;
+          this.lineIndex = 2;
           break;
         case 4:
           top = this.isIP5 ? 2350 : 2700;
-          this.activeIndex = 47;
+          this.activeIndex = 48;
+          this.lineIndex = 3;
           break;
         case 5:
-          top = this.isIP5 ? 3200 : 3700;
-          this.activeIndex = 64;
+          top = this.isIP5 ? 3000 : 3350;
+          this.activeIndex = 58;
+          this.lineIndex = 4;
+          break;
+        case 99:
+           top = 0;
+          this.activeIndex = 1;
+          this.lineIndex = 98;
           break;
       }
       this.currentSpot = this.spotList[this.activeIndex - 1];
