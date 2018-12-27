@@ -169,7 +169,7 @@ export default {
     }
   },
 
-  created() {
+  onLoad() {
     this.userCode = wx.getStorageSync("userCode");
     this.getNoteList();
   },
