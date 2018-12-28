@@ -117,14 +117,7 @@ export default {
       wx.navigateTo({ url: "../list/main?spot_index=" + spot.sortNo });
     },
     getSpot(queryType) {
-      let storageName, queryUrl;
-      if (queryType === 0) {
-        storageName = "NatrueList";
-        queryUrl = config.base + "attraction/NaturalList";
-      } else {
-        storageName = "PoetryList";
-        queryUrl = config.base + "attraction/PoetryList";
-      }
+      let queryUrl = config.base + "attraction/List";
       return new Promise(resolve => {
         console.log({ storageName });
         const storageData = wx.getStorageSync(storageName);

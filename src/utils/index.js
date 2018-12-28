@@ -24,9 +24,9 @@ export const formatDate = (time,YYYY) => {
       year = d.getFullYear(),
       month = d.getMonth() + 1,
       date = d.getDate(),
-      hour = d.getHours(),
-      minute = d.getMinutes(),
-      second = d.getSeconds();
+      hour = d.getHours()<10?`0${d.getHours()}`:d.getHours(),
+      minute = d.getMinutes()<10?`0${d.getMinutes()}`:d.getMinutes(),
+      second = d.getSeconds()<10?`0${d.getSeconds()}`:d.getSeconds();
   if(YYYY){
     return year + "-" + month + "-" + date + " " + hour + ":" + minute;
   }else{

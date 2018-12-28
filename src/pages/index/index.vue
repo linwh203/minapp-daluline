@@ -57,7 +57,7 @@
           class="scroll-title-body"
         >
       </div>
-      <div class="spot">
+      <div class="spot" v-if="fullSpot.length>0">
         <div
           class="spot-item"
           v-for="(item,index) in fullSpot"
@@ -99,12 +99,7 @@ export default {
   data() {
     return {
       prefix: config.prefix,
-      currentSpot: {
-        spot_coverurl: "",
-        spot_title: "",
-        spot_describe: "",
-        spot_id: ""
-      },
+      currentSpot: {},
       fullHeight: "",
       activeIndex: 1,
       toView: "spot1",
@@ -309,20 +304,20 @@ export default {
       const self = this;
       let process = data => {
         this.spotList = storageData;
-        this.currentSpot = storageData[0];
+        this.currentSpot = storageData[0]||[];
         this.fullSpot.length = 0;
         for (let i = 0; i <= data.length; i++) {
           let item = { num: i+1, y: this._fy(i) };
           this.fullSpot.push(item);
         }
       };
-      const storageData = wx.getStorageSync("NatureList").slice(0,63);
+      const storageData = wx.getStorageSync("DaluList").slice(0,63);
       if (storageData) {
         process(storageData);
         return;
       }
       wx.request({
-        url: config.base + "attraction/NaturalList", //开发者服务器接口地址",
+        url: config.base + "attraction/List", //开发者服务器接口地址",
         data: {
           lineId: config.lineId
         }, //请求的参数",
@@ -331,8 +326,8 @@ export default {
         success: res => {
           // console.log(res)
           // self.GLOBAL.spot_list = res.data.data
-          const data = res.data.data.slice(0,63);
-          this.setStorage("NatureList", data);
+          const data = res.data.data;
+          this.setStorage("DaluList", data);
           process(data);
         },
         fail: () => {},
@@ -426,17 +421,6 @@ export default {
           this.isIPXS = true;
         }
       }
-    });
-    wx.request({
-      url: config.base + 'attraction/List', //开发者服务器接口地址",
-      data: {
-        lineId: config.lineId
-      }, //请求的参数",
-      method: 'GET',
-      dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
-      success: res => {console.log(res)},
-      fail: () => {},
-      complete: () => {}
     });
   },
   onReady() {

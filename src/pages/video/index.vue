@@ -164,9 +164,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  // background: rgba(0,0,0,.6);
-  background: url("https://gw.alicdn.com/tfs/TB1b9hcnQPoK1RjSZKbXXX1IXXa-640-1008.png")
-    no-repeat top/cover;
+  background: rgba(0,0,0,.6);
   z-index: 999;
   &-top {
     position: absolute;

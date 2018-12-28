@@ -1,11 +1,14 @@
 <template>
   <div class="container">
     <div class="note-area">
-      <div class="textarea" @click="touchTextarea">
-        <textarea placeholder="__ 留下笔记" :placeholder-style="style" auto-height fixed v-model="text"/>
+      <div class="textarea">
+        <textarea 
+          :placeholder="holderText"
+          :placeholder-style="style"
+          @focus="onFocus" auto-height fixed v-model="text"/>
       </div>
       <div class="submit" @click="submit">发布</div>
-      <cover-view class="note-area-icon" v-if="!text">
+      <cover-view class="note-area-icon" v-if="showHolder">
         <cover-image src="https://gw.alicdn.com/tfs/TB1GU03xlLoK1RjSZFuXXXn0XXa-30-32.png"></cover-image>
       </cover-view>
     </div>
@@ -55,7 +58,9 @@ export default {
       userCode: "",
       isFoucs: false,
       currentId:"",
-      dialog:false
+      dialog:false,
+      showHolder:true,
+      holderText:"__ 留下笔记"
     };
   },
 
@@ -69,6 +74,11 @@ export default {
     openDialog(id) {
       this.currentId = id;
       this.dialog = true;
+    },
+    onFocus() {
+      console.log("focus");
+      this.showHolder = false;
+      this.holderText = "";
     },
     confirmDel() {
       const token = wx.getStorageSync("userCode");

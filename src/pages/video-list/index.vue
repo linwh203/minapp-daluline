@@ -4,7 +4,7 @@
       <div class="video-list-item" v-for="(item,index) in videoList" :key="index">
         <div class="video-list-item-preview" @click="jumpVideo(item)">
           <div class="video-list-item-preview-base">
-            <img :src="item.src">  
+            <img :src="item.cover_img" v-if=item.cover_img>  
           </div>  
           <div class="video-list-item-preview-cover">
             <img src="https://gw.alicdn.com/tfs/TB1ePUKypzqK1RjSZFCXXbbxVXa-290-200.png">  
@@ -12,7 +12,7 @@
           <div class="video-list-item-preview-time">10:12:12</div>  
         </div>
         <div class="video-list-item-name">
-          红外相机镜头下的的野猪
+          {{item.title}}
         </div>
       </div>
     </div>
@@ -20,22 +20,12 @@
 </template>
 
 <script>
-import { config } from "../../utils/index";
+import { config, formatDate } from "../../utils/index";
 
 export default {
   data() {
     return {
-      videoList:[
-        {src:"https://gw.alicdn.com/tfs/TB1Pc7Pc3HqK1RjSZFPXXcwapXa-255-155.jpg"},
-        {src:"https://gw.alicdn.com/tfs/TB1Pc7Pc3HqK1RjSZFPXXcwapXa-255-155.jpg"},
-        {src:"https://gw.alicdn.com/tfs/TB1Pc7Pc3HqK1RjSZFPXXcwapXa-255-155.jpg"},
-        {src:"https://gw.alicdn.com/tfs/TB1Pc7Pc3HqK1RjSZFPXXcwapXa-255-155.jpg"},
-        {src:"https://gw.alicdn.com/tfs/TB1Pc7Pc3HqK1RjSZFPXXcwapXa-255-155.jpg"},
-        {src:"https://gw.alicdn.com/tfs/TB1Pc7Pc3HqK1RjSZFPXXcwapXa-255-155.jpg"},
-        {src:"https://gw.alicdn.com/tfs/TB1Pc7Pc3HqK1RjSZFPXXcwapXa-255-155.jpg"},
-        {src:"https://gw.alicdn.com/tfs/TB1Pc7Pc3HqK1RjSZFPXXcwapXa-255-155.jpg"},
-        {src:"https://gw.alicdn.com/tfs/TB1Pc7Pc3HqK1RjSZFPXXcwapXa-255-155.jpg"}
-      ],
+      videoList:[],
       coverSrc:
         "https://gw.alicdn.com/tfs/TB1EEXbnQvoK1RjSZFNXXcxMVXa-640-1008.png",
       videoSrc:''
@@ -46,28 +36,33 @@ export default {
   methods: {
     jumpVideo(item) {
       wx.navigateTo({ url: `../video/main?id=${item.id||0}` });
-    }
-  },
-
-  onLoad(option) {
-    this.videoSrc = option.video_url;
-    wx.request({
+    },
+    loadData() {
+      wx.request({
       url: config.base + 'Attraction/VideoList', //开发者服务器接口地址",
       data: 'data', //请求的参数",
       method: 'GET',
       dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
       success: res => {
-        console.log(res)
+        const data = res.data && res.data.data;
+        this.videoList = data;
       },
       fail: () => {},
       complete: () => {}
     });
+    }
+  },
+
+  onLoad(option) {
+    this.loadData();
   }
 };
 </script>
 
 <style scoped lang="less">
 .container {
+  min-height: 100%;
+  background: #fff;
   position: relative;
 }
 .video-list {

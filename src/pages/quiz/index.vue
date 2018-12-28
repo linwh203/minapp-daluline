@@ -145,7 +145,7 @@ export default {
         dataType: "json",
         success: res => {
           console.log(res.data);
-          this.count = res.data.data.count || 0;
+          this.count = res.data.data.count ;
           this.score = res.data.data.score || 0;
           this.coin = res.data.data.coin || 0;
         },
