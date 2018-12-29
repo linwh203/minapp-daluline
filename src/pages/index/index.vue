@@ -394,7 +394,6 @@ export default {
      *
      */
     _fy(x) {
-      console.warn(x, this._fy1(x), this._fy2(x), this._fy1(x) + this._fy2(x));
       return this._fy1(x) + this._fy2(x);
     },
     _fy1(x) {
