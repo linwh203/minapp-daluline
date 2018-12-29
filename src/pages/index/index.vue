@@ -27,7 +27,7 @@
         <img src="https://gw.alicdn.com/tfs/TB1isa6v3HqK1RjSZFkXXX.WFXa-104-96.png" alt>
       </div>
       <div class="index-tab-item icon-quiz" @click="bindTab('../quiz/main')">
-      <!-- <div class="index-tab-item icon-quiz" @click="bindTab('../developing/main')"> -->
+        <!-- <div class="index-tab-item icon-quiz" @click="bindTab('../developing/main')"> -->
         <img src="https://gw.alicdn.com/tfs/TB1OOfmv4jaK1RjSZKzXXXVwXXa-104-96.png" alt>
       </div>
       <div class="index-tab-item icon-my" @click="bindTab('../my/main')">
@@ -38,11 +38,31 @@
     <scroll-view scroll-x style="width: 100%" class="navi-scroll">
       <div class="navi">
         <div class="navi-item" :style="lineIndex==98?'color:#2b9f62':''" @click="toSmallLine(98)">全部</div>
-        <div class="navi-item" :style="lineIndex==0?'color:#2b9f62':''" @click="toSmallLine(0)">第一段 新大-七星湾</div>
-        <div class="navi-item" :style="lineIndex==1?'color:#2b9f62':''" @click="toSmallLine(1)">第二段 七星湾-桔钓沙段</div>
-        <div class="navi-item" :style="lineIndex==2?'color:#2b9f62':''" @click="toSmallLine(2)">第三段 桔钓沙-杨梅坑段</div>
-        <div class="navi-item" :style="lineIndex==3?'color:#2b9f62':''" @click="toSmallLine(3)">第四段 杨梅坑-过店段</div>
-        <div class="navi-item" :style="lineIndex==4?'color:#2b9f62':''" @click="toSmallLine(4)">第五段 过店-鹿咀段</div>
+        <div
+          class="navi-item"
+          :style="lineIndex==0?'color:#2b9f62':''"
+          @click="toSmallLine(0)"
+        >第一段 新大-七星湾</div>
+        <div
+          class="navi-item"
+          :style="lineIndex==1?'color:#2b9f62':''"
+          @click="toSmallLine(1)"
+        >第二段 七星湾-桔钓沙段</div>
+        <div
+          class="navi-item"
+          :style="lineIndex==2?'color:#2b9f62':''"
+          @click="toSmallLine(2)"
+        >第三段 桔钓沙-杨梅坑段</div>
+        <div
+          class="navi-item"
+          :style="lineIndex==3?'color:#2b9f62':''"
+          @click="toSmallLine(3)"
+        >第四段 杨梅坑-过店段</div>
+        <div
+          class="navi-item"
+          :style="lineIndex==4?'color:#2b9f62':''"
+          @click="toSmallLine(4)"
+        >第五段 过店-鹿咀段</div>
       </div>
     </scroll-view>
     <scroll-view scroll-y class="scroll" :scroll-into-view="toView">
@@ -77,17 +97,26 @@
             <img
               class="spot-item-window-pic"
               :src="prefix + currentSpot.spot_coverurl"
-              v-if="currentSpot.spot_coverurl"
+              v-if="currentSpot && currentSpot.spot_coverurl"
             >
-            <div class="spot-item-window-text">
+            <div class="spot-item-window-text" v-if="currentSpot">
               <div class="spot-item-window-title">{{currentSpot.spot_title}}</div>
               <div class="spot-item-window-desc">{{currentSpot.spot_describe}}</div>
             </div>
           </div>
         </div>
       </div>
-      <img src="https://gw.alicdn.com/tfs/TB1HJvXv4TpK1RjSZFGXXcHqFXa-519-6810.png" class="scroll-road">
-      <img src="https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png" class="scroll-bg" @load="finishLoadImg">
+      <img
+        mode="widthFix"
+        src="https://gw.alicdn.com/tfs/TB1HJvXv4TpK1RjSZFGXXcHqFXa-519-6810.png"
+        class="scroll-road"
+      >
+      <img
+        mode="widthFix"
+        src="https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png"
+        class="scroll-bg"
+        @load="finishLoadImg"
+      >
     </scroll-view>
   </div>
 </template>
@@ -115,7 +144,7 @@ export default {
       showRoadSelect: false,
       tab1: false,
       tab2: false,
-      lineIndex:98,
+      lineIndex: 98,
       windowHeight: 0,
       firstY: 0
     };
@@ -223,7 +252,7 @@ export default {
           this.lineIndex = 4;
           break;
         case 99:
-           top = 0;
+          top = 0;
           this.activeIndex = 1;
           this.lineIndex = 98;
           break;
@@ -304,14 +333,14 @@ export default {
       const self = this;
       let process = data => {
         this.spotList = storageData;
-        this.currentSpot = storageData[0]||[];
+        this.currentSpot = storageData[0] || [];
         this.fullSpot.length = 0;
         for (let i = 0; i <= data.length; i++) {
-          let item = { num: i+1, y: this._fy(i) };
+          let item = { num: i + 1, y: this._fy(i) };
           this.fullSpot.push(item);
         }
       };
-      const storageData = wx.getStorageSync("DaluList").slice(0,63);
+      const storageData = wx.getStorageSync("DaluList").slice(0, 63);
       if (storageData) {
         process(storageData);
         return;
@@ -345,7 +374,7 @@ export default {
      */
     _fx(x) {
       let dict = this._getMarginXDict();
-      return dict[(x) % 6];
+      return dict[x % 6];
     },
     _getMarginXDict() {
       return [20, 30, 40, 50];
@@ -365,26 +394,39 @@ export default {
      *
      */
     _fy(x) {
+      console.warn(x, this._fy1(x), this._fy2(x), this._fy1(x) + this._fy2(x));
       return this._fy1(x) + this._fy2(x);
     },
     _fy1(x) {
       let dict = this._getMarginYDict();
-      return dict[parseInt((x + 1) / 6)];
+      return dict[parseInt(x / 6)];
     },
     _fy2(x) {
       let deltaY = this._getDeltaY(x);
-      return deltaY * ((x + 1) % 6);
+      return deltaY * (x % 6);
     },
     _getDeltaY(x) {
-      let index = parseInt((x + 1) / 6);
+      let index = parseInt(x / 6);
       let dict = this._getMarginYDict();
-      let rst = dict[index + 1] ? (dict[index + 1] - dict[index]) / 6 : 1.05;
+      let rst = dict[index + 1] ? (dict[index + 1] - dict[index]) / 6 : 1.63;
       console.log(index, dict[index + 1], dict[index], rst);
       return rst;
     },
     _getMarginYDict() {
-      // 原尺寸 [5.02, 13.86, 22.71, 31.55, 40.4, 49.24, 58.09, 66.93, 75.78, 84.62, 93.47];
-      return [3.62, 12.46, 21.31, 29.85, 39.0, 47.84, 56.69, 65.53, 74.18, 83.02, 91.77, 101]; //微调后
+      let arr = [
+        5.46,
+        15.235,
+        24.94,
+        34.74,
+        44.54,
+        54.34,
+        64.14,
+        73.94,
+        83.74,
+        93.54,
+        103.34
+      ];
+      return arr;
     }
   },
   mounted() {
@@ -441,27 +483,27 @@ export default {
   overflow: hidden;
   height: 8264rpx;
 }
-.navi{
+.navi {
   height: 78rpx;
   background: #fff;
-  color:#101010;
+  color: #101010;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   font-size: 28rpx;
   flex-direction: row;
   width: 224%;
-  &-item{
-    margin-left:36rpx;
+  &-item {
+    margin-left: 36rpx;
   }
-  &-scroll{
+  &-scroll {
     position: fixed;
     top: 0;
     left: 0;
     z-index: 40;
   }
-  .active{
-    color:#2b9f62;
+  .active {
+    color: #2b9f62;
   }
 }
 .spot {
@@ -554,27 +596,27 @@ export default {
     }
   }
   &-item:nth-of-type(6n + 2) {
-    margin-left: 47%;
+    margin-left: 50%;
   }
   &-item:nth-of-type(6n + 3) {
-    margin-left: 28%;
+    margin-left: 30%;
   }
   &-item:nth-of-type(6n + 1) {
-    margin-left: 64%;
+    margin-left: 68%;
   }
   &-item:nth-of-type(6n + 4) {
     margin-left: 13%;
   }
   &-item:nth-of-type(6n) {
-    margin-left: 47%;
+    margin-left: 50%;
   }
   &-item:nth-of-type(6n + 5) {
-    margin-left: 28%;
+    margin-left: 30%;
   }
 }
 .scroll {
   position: relative;
-  top:78rpx;
+  top: 78rpx;
   &-title {
     width: 402rpx;
     height: 234rpx;
@@ -722,5 +764,8 @@ export default {
 }
 .rotate {
   transform: rotate(180deg);
+}
+.scroll-road {
+  width: 90%;
 }
 </style>
