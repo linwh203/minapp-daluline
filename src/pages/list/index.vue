@@ -6,7 +6,11 @@
         <div class="nav-content">
           <div class="nav-item" :class="audioOff?'audio':'pause'" @click="playAudio"></div>
           <div class="point"></div>
-          <div class="nav-item" :class="lang=='ch'?'chinese':'english'" @click="lang=='ch'?lang='en':lang='ch'"></div>
+          <div
+            class="nav-item"
+            :class="lang=='ch'?'chinese':'english'"
+            @click="lang=='ch'?lang='en':lang='ch'"
+          ></div>
           <div class="point"></div>
           <div class="nav-item note" v-if="false"></div>
           <!-- <button class="nav-item share" style="margin-left:0;margin-right:0;" open-type="share"></button> -->
@@ -24,19 +28,25 @@
         <div v-if="item.author">
           <div class="article-author">{{item.author}}</div>
           <div class="article-title">{{item.title}}</div>
-
         </div>
         <div v-else>
-          <div class="article-title-full" >{{item.title}}</div>
+          <div class="article-title-full">{{item.title}}</div>
         </div>
         <div class="article-text" v-html="item.content"></div>
       </div>
-     
-      <img class="article-img" :src="prefix + item.url" v-if="item.url" mode="widthFix">
+      <div v-if="item.url">
+        <img
+          v-for="(urlItem,urlIndex) in item.url"
+          class="article-img"
+          :key="urlIndex"
+          :src="prefix + urlItem.url"
+          mode="widthFix"
+        >
+      </div>
       <!-- <div class="writer" v-if="articleData[1]">
         <div class="writer-title">{{articleData[1].title}}</div>
         <div class="writer-text" v-html="articleData[1].content"></div>
-      </div> -->
+      </div>-->
     </div>
   </div>
 </template>
@@ -164,53 +174,37 @@ export default {
       });
     },
     getSpot(line) {
-      let storageData, requestUrl;
-      if (line == "shige") {
-        storageData = wx.getStorageSync("PoetryList");
-        requestUrl = "attraction/PoetryList";
-      } else {
-        storageData = wx.getStorageSync("NatureList");
-        requestUrl = "attraction/NaturalList";
-      }
-      if (storageData) {
-        this.spotList = storageData;
-        return;
-      }
-      wx.request({
-        url: config.base + requestUrl, //开发者服务器接口地址",
-        data: {
-          lineId: config.lineId
-        }, //请求的参数",
-        method: "GET",
-        dataType: "json", //如果设为json，会尝试对返回的数据做一次 JSON.parse
-        success: res => {
-          // console.log(res)
-          const data = this.res.data.data;
-          if (line == "shige") {
-            this.setStorage("PoetryList", data);
-          } else {
-            this.setStorage("NatureList", data);
-          }
-          this.spotList = data;
-        },
-        fail: () => {},
-        complete: () => {}
+      let storageName = "DaluList";
+      let storageData;
+      let requestUrl = "attraction/listDetail";
+      return new Promise(resolve => {
+        storageData = wx.getStorageSync(storageName);
+        if (storageData) {
+          resolve(storageData);
+        } else {
+          wx.request({
+            url: config.base + requestUrl, //开发者服务器接口地址",
+            data: {
+              lineId: config.lineId
+            }, //请求的参数",
+            method: "GET",
+            dataType: "json", //如果设为json，会尝试对返回的数据做一次 JSON.parse
+            success: res => {
+              const data = this.res.data.data;
+              resolve(data);
+            }
+          });
+        }
       });
     }
   },
   onLoad(option) {
     const index = option.spot_index - 1;
-    console.log(index);
-    if (index >= 89) {
-      this.spotLine = "shige";
-      this.currentIndex = index - 89;
-    } else {
-      this.spotLine = "ziran";
-      this.currentIndex = index;
-    }
-    this.getSpot(this.spotLine);
+    console.log({ index });
+    this.getSpot(this.spotLine).then(data => {
+      this.spotList = data;
+    });
     this.innerAudioContext = wx.createInnerAudioContext();
-    
   },
   onHide() {
     this.audioOff = true;
@@ -327,22 +321,25 @@ export default {
     height: 28rpx;
   }
 }
-.bigtitle{
+.bigtitle {
   position: absolute;
-  left: 4rpx;right: 4rpx;margin: auto;
+  left: 4rpx;
+  right: 4rpx;
+  margin: auto;
   top: 138rpx;
   height: 110rpx;
-  color:#095d31;
+  color: #095d31;
   font-size: 36rpx;
   font-weight: bold;
   line-height: 100rpx;
   text-align: center;
-  background: url('https://gw.alicdn.com/tfs/TB1fuG0v3HqK1RjSZFkXXX.WFXa-630-94.png') no-repeat top/cover;
+  background: url("https://gw.alicdn.com/tfs/TB1fuG0v3HqK1RjSZFkXXX.WFXa-630-94.png")
+    no-repeat top/cover;
 }
 .main {
   margin-top: 40rpx;
   border: 9rpx solid #fff;
-  background: rgba(0,0,0,.4);
+  background: rgba(0, 0, 0, 0.4);
 }
 .article {
   padding: 16rpx;
@@ -365,11 +362,11 @@ export default {
     letter-spacing: 2rpx;
   }
   &-img {
-    border-left: 8rpx solid #fff;
-    border-right: 8rpx solid #fff;
-    border-bottom: 8rpx solid #fff;
-    height: 400rpx;
-    width: 97.7%;
+    // border-left: 8rpx solid #fff;
+    // border-right: 8rpx solid #fff;
+    // border-bottom: 8rpx solid #fff;
+    // height: 400rpx;
+    width: 100%;
   }
 }
 .writer {
