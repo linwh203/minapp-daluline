@@ -65,7 +65,7 @@
         >第五段 过店-鹿咀段</div>
       </div>
     </scroll-view>
-    <scroll-view scroll-y class="scroll" :scroll-into-view="toView">
+    <scroll-view scroll-y class="scroll">
       <div class="scroll-title">
         <img :src="titleSrc" class="scroll-title-pic">
         <img
@@ -428,10 +428,9 @@ export default {
       return arr;
     }
   },
-  mounted() {
-    this.getSpot();
-  },
+  mounted() {},
   onLoad() {
+    this.getSpot();
     // 判断是否第一次使用
     const firsttime = wx.getStorageSync("firsttime");
     if (!firsttime) {
