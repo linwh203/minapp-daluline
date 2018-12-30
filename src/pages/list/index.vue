@@ -22,16 +22,16 @@
       </div>
       <div class="nav-border"></div>
     </div>
-    <div class="bigtitle">123</div>
     <div class="main" v-for="(item,index) in articleData" :key="index">
+      <div class="bigtitle">{{item.title}}</div>
       <div class="article" v-if="item">
         <div v-if="item.author">
           <div class="article-author">{{item.author}}</div>
-          <div class="article-title">{{item.title}}</div>
+          <!-- <div class="article-title">{{item.title}}</div> -->
         </div>
-        <div v-else>
+        <!-- <div v-else>
           <div class="article-title-full">{{item.title}}</div>
-        </div>
+        </div>-->
         <div class="article-text" v-html="item.content"></div>
       </div>
       <div v-if="item.url">
@@ -203,6 +203,7 @@ export default {
     console.log({ index });
     this.getSpot(this.spotLine).then(data => {
       this.spotList = data;
+      this.loadDetail();
     });
     this.innerAudioContext = wx.createInnerAudioContext();
   },
@@ -227,7 +228,6 @@ export default {
   },
   onReady() {
     console.log("onReady");
-    this.loadDetail();
   },
   onShareAppMessage(result) {
     let title = "鹿咀自然课堂步道";
@@ -321,25 +321,29 @@ export default {
     height: 28rpx;
   }
 }
-.bigtitle {
-  position: absolute;
-  left: 4rpx;
-  right: 4rpx;
-  margin: auto;
-  top: 138rpx;
-  height: 110rpx;
-  color: #095d31;
-  font-size: 36rpx;
-  font-weight: bold;
-  line-height: 100rpx;
-  text-align: center;
-  background: url("https://gw.alicdn.com/tfs/TB1fuG0v3HqK1RjSZFkXXX.WFXa-630-94.png")
-    no-repeat top/cover;
-}
 .main {
-  margin-top: 40rpx;
+  @size: 110rpx;
+  position: relative;
+  margin-bottom: 40rpx;
   border: 9rpx solid #fff;
+  border-top: none;
   background: rgba(0, 0, 0, 0.4);
+  padding-top: @size;
+  .bigtitle {
+    position: absolute;
+    left: -20rpx;
+    right: -20rpx;
+    margin: auto;
+    top: 0;
+    height: @size;
+    color: #095d31;
+    font-size: 36rpx;
+    font-weight: bold;
+    line-height: 100rpx;
+    text-align: center;
+    background: url("https://gw.alicdn.com/tfs/TB1fuG0v3HqK1RjSZFkXXX.WFXa-630-94.png")
+      no-repeat top/cover;
+  }
 }
 .article {
   padding: 16rpx;
@@ -462,7 +466,7 @@ export default {
     left: 0;
     width: 100%;
     box-sizing: border-box;
-    height: @h / 2;
+    height: 100rpx;
     border-left: 8rpx solid #fff;
     border-right: 8rpx solid #fff;
   }
