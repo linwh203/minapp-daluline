@@ -200,6 +200,7 @@ export default {
   },
   onLoad(option) {
     const index = option.spot_index - 1;
+    this.currentIndex = index;
     console.log({ index });
     this.getSpot(this.spotLine).then(data => {
       this.spotList = data;
