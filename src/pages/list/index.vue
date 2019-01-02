@@ -6,11 +6,7 @@
         <div class="nav-content">
           <div class="nav-item" :class="audioOff?'audio':'pause'" @click="playAudio"></div>
           <div class="point"></div>
-          <div
-            class="nav-item"
-            :class="lang=='ch'?'chinese':'english'"
-            @click="lang=='ch'?lang='en':lang='ch'"
-          ></div>
+          <div class="nav-item" :class="lang=='ch'?'chinese':'english'" @click="changeLang"></div>
           <div class="point"></div>
           <div class="nav-item note" v-if="false"></div>
           <!-- <button class="nav-item share" style="margin-left:0;margin-right:0;" open-type="share"></button> -->
@@ -145,8 +141,13 @@ export default {
         this.innerAudioContext.stop();
       }
       let spot_id = this.spotList[this.currentIndex].spot_id;
+      let lang = this.lang;
+      let url =
+        lang === "ch"
+          ? config.base + "attraction/listdetail"
+          : config.base + "attraction/englishlistdetail";
       wx.request({
-        url: config.base + "attraction/listdetail", //开发者服务器接口地址",
+        url, //开发者服务器接口地址",
         data: {
           spot_id: spot_id
         }, //请求的参数",
@@ -196,9 +197,19 @@ export default {
           });
         }
       });
+    },
+    changeLang() {
+      this.lang = this.lang === "ch" ? "en" : "ch";
+      wx.setStorageSync("list-lang", this.lang);
+      this.loadDetail();
     }
   },
   onLoad(option) {
+    // 使用默认的语言
+    // 没有默认,就用中文(ch)
+    this.lang = wx.getStorageSync("list-lang") || "ch";
+
+    // 获取数据
     const index = option.spot_index - 1;
     this.currentIndex = index;
     console.log({ index });
@@ -206,6 +217,7 @@ export default {
       this.spotList = data;
       this.loadDetail();
     });
+    // 音频
     this.innerAudioContext = wx.createInnerAudioContext();
   },
   onHide() {
