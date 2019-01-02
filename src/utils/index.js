@@ -37,8 +37,8 @@ export const formatDate = (time,YYYY) => {
 export const config = {
   // prefix: 'https://etx.forestvisual.com',
   // base: 'https://etx.forestvisual.com/guidewechat/',
-  prefix: 'http://39.98.47.219:8006',
-  base: 'http://39.98.47.219:8006/GuideWechat/',
+  prefix: 'https://dlx.forestvisual.com',
+  base: 'https://dlx.forestvisual.com/GuideWechat/',
   lineId: 'C20442B1-FC17-4369-8D03-27C7A7D0EB10',
   appId: 'wx2524b56d9fcdc87a',
   // appId: 'wx64104ee36c863058',
