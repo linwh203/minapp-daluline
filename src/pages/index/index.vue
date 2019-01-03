@@ -218,22 +218,34 @@ export default {
           this.lineIndex = 0;
           break;
         case 2:
-          top = this.isIP5 ? 1600 : 1800;
+          top = this.isIP5 ? 1700 : 2000;
+          if (this.isPlus) {
+            top = 2100;
+          }
           this.activeIndex = 30;
           this.lineIndex = 1;
           break;
         case 3:
-          top = this.isIP5 ? 2000 : 2200;
+          top = this.isIP5 ? 2100 : 2500;
+          if (this.isPlus) {
+            top = 2850;
+          }
           this.activeIndex = 38;
           this.lineIndex = 2;
           break;
         case 4:
-          top = this.isIP5 ? 2350 : 2700;
+          top = this.isIP5 ? 2700 : 3200;
+          if (this.isPlus) {
+            top = 3600;
+          }
           this.activeIndex = 48;
           this.lineIndex = 3;
           break;
         case 5:
-          top = this.isIP5 ? 3000 : 3350;
+          top = this.isIP5 ? 3000 : 3800;
+          if (this.isPlus) {
+            top = 4300;
+          }
           this.activeIndex = 58;
           this.lineIndex = 4;
           break;
