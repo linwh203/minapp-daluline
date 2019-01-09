@@ -5,17 +5,16 @@
       <div class="video-list-item" v-for="(item,index) in videoList" :key="index">
         <div class="video-list-item-preview">
           <div class="video-list-item-preview-base">
-            <img :src="item.src">  
+            <img :src="prefix+item.cover_img" v-if=item.cover_img>  
           </div>  
-          <div class="video-list-item-preview-cover">
+          <div class="video-list-item-preview-cover" @click="changeVideo(item,index)">
             <img src="https://gw.alicdn.com/tfs/TB1D9.IyAvoK1RjSZFNXXcxMVXa-290-200.png" v-if="currentIndex == index">
             <img src="https://gw.alicdn.com/tfs/TB1ePUKypzqK1RjSZFCXXbbxVXa-290-200.png" v-else>  
-
           </div>  
-          <div class="video-list-item-preview-time">10:12:12</div>  
+          <div class="video-list-item-preview-time" v-if="item.time">{{item.time}}</div>  
         </div>
         <div class="video-list-item-name">
-          红外相机镜头下的的野猪
+          {{item.title}}
         </div>
       </div>
     </div>
@@ -33,22 +32,13 @@ import { config } from "../../utils/index";
 export default {
   data() {
     return {
+      prefix: config.prefix,
       videoCtx: null,
       fullSize: false,
       showModal: false,
       currentIndex: 0,
       videoId: "",
-      videoList:[
-        {src:"https://gw.alicdn.com/tfs/TB1Pc7Pc3HqK1RjSZFPXXcwapXa-255-155.jpg"},
-        {src:"https://gw.alicdn.com/tfs/TB1Pc7Pc3HqK1RjSZFPXXcwapXa-255-155.jpg"},
-        {src:"https://gw.alicdn.com/tfs/TB1Pc7Pc3HqK1RjSZFPXXcwapXa-255-155.jpg"},
-        {src:"https://gw.alicdn.com/tfs/TB1Pc7Pc3HqK1RjSZFPXXcwapXa-255-155.jpg"},
-        {src:"https://gw.alicdn.com/tfs/TB1Pc7Pc3HqK1RjSZFPXXcwapXa-255-155.jpg"},
-        {src:"https://gw.alicdn.com/tfs/TB1Pc7Pc3HqK1RjSZFPXXcwapXa-255-155.jpg"},
-        {src:"https://gw.alicdn.com/tfs/TB1Pc7Pc3HqK1RjSZFPXXcwapXa-255-155.jpg"},
-        {src:"https://gw.alicdn.com/tfs/TB1Pc7Pc3HqK1RjSZFPXXcwapXa-255-155.jpg"},
-        {src:"https://gw.alicdn.com/tfs/TB1Pc7Pc3HqK1RjSZFPXXcwapXa-255-155.jpg"}
-      ],
+      videoList:[],
       coverSrc:
         "https://gw.alicdn.com/tfs/TB1oAI2yxnaK1RjSZFtXXbC2VXa-1136-640.png",
       videoSrc:""
@@ -63,6 +53,15 @@ export default {
       wx.setStorageSync("firstvideo", true);
       this.showModal = false;
     },
+    changeVideo(item,index) {
+      this.videoCtx.stop();
+      this.coverSrc = this.prefix + item.cover_img;
+      this.videoSrc = item.video_url;
+      this.currentIndex = index;
+      wx.setNavigationBarTitle({
+        title: item.title
+      })
+    }
   },
 
   created() {
@@ -80,14 +79,27 @@ export default {
       method: 'GET',
       dataType: 'json', //如果设为json，会尝试对返回的数据做一次 JSON.parse
       success: res => {
-        console.log(res)
+        const data = res.data && res.data.data;
+        this.videoList = data;
+        if(this.videoList.length>0) {
+          const currentItem = this.videoList.filter((item,index) => {
+            if (item.id == option.id ) {
+              this.currentIndex = index;
+              return true
+            } else {
+              return false
+            }
+          })[0];
+          this.coverSrc = this.prefix + currentItem.cover_img;
+          this.videoSrc = currentItem.video_url;
+          wx.setNavigationBarTitle({
+            title: currentItem.title
+          })
+        }
       },
       fail: () => {},
       complete: () => {}
     });
-    wx.setNavigationBarTitle({
-      title: '视频播放'
-    })
   },
   onReady() {
     this.videoCtx = wx.createVideoContext("myVideo");
