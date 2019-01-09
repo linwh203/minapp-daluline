@@ -5,11 +5,11 @@
         <div class="nav-line"></div>
         <div class="nav-content">
           <div class="nav-item" :class="audioOff?'audio':'pause'" @click="playAudio"></div>
-          <div class="point"></div>
+          <!-- <div class="point"></div> -->
+          <div class="nav-item note" @click="showCover = true"></div>
+          <!-- <div class="point"></div> -->
           <div class="nav-item" :class="lang=='ch'?'chinese':'english'" @click="changeLang"></div>
-          <div class="point"></div>
-          <div class="nav-item note" v-if="false"></div>
-          <!-- <button class="nav-item share" style="margin-left:0;margin-right:0;" open-type="share"></button> -->
+          <!-- <div class="point"></div> -->
           <div class="nav-item share">
             <button style="width:100%;height:100%;opacity:0;padding:0;" open-type="share"></button>
           </div>
@@ -44,6 +44,13 @@
         <div class="writer-text" v-html="articleData[1].content"></div>
       </div>-->
     </div>
+    <div class="cover" v-if="showCover"></div>
+    <div class="ruleLayer" v-if="showCover">
+      <scroll-view scroll-y class="ruleLayer-main">
+        <img mode="widthFix" src="https://gw.alicdn.com/tfs/TB1JJHuAVzqK1RjSZSgXXcpAVXa-460-1738.png" alt="">
+      </scroll-view>
+      <div class="close" @click="showCover = false"></div>
+    </div>
   </div>
 </template>
 
@@ -52,6 +59,7 @@ import { config } from "../../utils/index";
 export default {
   data() {
     return {
+      showCover: false,
       prefix: config.prefix,
       fromMap: false,
       showSub: false,
@@ -347,15 +355,18 @@ export default {
     left: -20rpx;
     right: -20rpx;
     margin: auto;
-    top: 0;
+    top: -20rpx;
     height: @size;
     color: #095d31;
     font-size: 36rpx;
     font-weight: bold;
-    line-height: 100rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom:20rpx;
     text-align: center;
     background: url("https://gw.alicdn.com/tfs/TB1fuG0v3HqK1RjSZFkXXX.WFXa-630-94.png")
-      no-repeat top/cover;
+      no-repeat center/contain;
   }
 }
 .article {
@@ -464,8 +475,8 @@ export default {
   }
   .note {
     // margin-left: 6%;
-    background: url("https://gw.alicdn.com/tfs/TB1B3U6nxjaK1RjSZFAXXbdLFXa-91-83.png")
-      no-repeat center/cover;
+    background: url("https://gw.alicdn.com/tfs/TB1hE2rA3HqK1RjSZJnXXbNLpXa-83-94.png")
+      no-repeat center/contain;
   }
   .share {
     // margin-left: 6%;
@@ -528,5 +539,41 @@ export default {
 }
 .btn-share-origin::after {
   border: 0;
+}
+.cover {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 80;
+  top: 0;
+  left: 0;
+}
+.ruleLayer {
+  width: 500rpx;
+  height: 760rpx;
+  position: fixed;
+  z-index: 81;
+  top: 20%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  &-main{
+    width: 500rpx;
+    height: 760rpx;
+    img{
+      width: 100%;
+    }
+  }
+}
+.close {
+  width: 70rpx;
+  height: 142rpx;
+  background: url("https://gw.alicdn.com/tfs/TB1bzrMwMHqK1RjSZJnXXbNLpXa-60-132.png")
+    no-repeat top/cover;
+  position: absolute;
+  right: 0;
+  top: -138rpx;
+  z-index: 81;
 }
 </style>
