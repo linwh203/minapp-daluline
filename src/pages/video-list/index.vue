@@ -4,12 +4,12 @@
       <div class="video-list-item" v-for="(item,index) in videoList" :key="index">
         <div class="video-list-item-preview" @click="jumpVideo(item)">
           <div class="video-list-item-preview-base">
-            <img :src="item.cover_img" v-if=item.cover_img>  
+            <img :src="prefix+item.cover_img" v-if=item.cover_img>  
           </div>  
           <div class="video-list-item-preview-cover">
             <img src="https://gw.alicdn.com/tfs/TB1ePUKypzqK1RjSZFCXXbbxVXa-290-200.png">  
           </div>  
-          <div class="video-list-item-preview-time">10:12:12</div>  
+          <div class="video-list-item-preview-time" v-if="item.time">{{item.time}}</div>  
         </div>
         <div class="video-list-item-name">
           {{item.title}}
@@ -25,6 +25,7 @@ import { config, formatDate } from "../../utils/index";
 export default {
   data() {
     return {
+      prefix: config.prefix,
       videoList:[],
       coverSrc:
         "https://gw.alicdn.com/tfs/TB1EEXbnQvoK1RjSZFNXXcxMVXa-640-1008.png",
@@ -35,7 +36,7 @@ export default {
 
   methods: {
     jumpVideo(item) {
-      wx.navigateTo({ url: `../video/main?id=${item.id||0}` });
+      wx.navigateTo({ url: `../video/main?id=${item.id}` });
     },
     loadData() {
       wx.request({
