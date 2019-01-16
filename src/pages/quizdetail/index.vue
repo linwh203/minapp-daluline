@@ -2,7 +2,7 @@
 <div class="mainContainer">
   <div class="container" v-if="!showCountdown">
     <div class="quiz-top">
-      <div class="quiz-top-mid">挑战 第{{(index+1)>stageNum?stageNum:(index+1)}}/{{stageNum}}关</div>
+      <div class="quiz-top-mid">挑战 第{{snum}}/5关</div>
     </div>
     <div class="user">
       <open-data type="userAvatarUrl" class="userPic"></open-data>
@@ -49,7 +49,7 @@
         <span>+ {{bonus}}</span>
       </div> 
        <div class="result-line"></div> 
-       <div class="quiz-result-btn-top" @click="bindTab('../quiz/main')">继续挑战</div>
+       <div class="quiz-result-btn-top" @click="newStage">继续挑战</div>
        <div class="quiz-result-btn-btm" @click="bindTab('../my-reward/main')">查看成就</div>
     </div>
     <div class="quiz-fail" v-if="quizFail">
@@ -69,6 +69,12 @@
       <div class="close" @click="closeLayer"></div>
     </div>
     <div class="endLayer" v-if="endLayer">
+      <div class="close" @click="closeLayer"></div>
+    </div>
+    <div class="failLayer" v-if="failLayer">
+      <div class="close" @click="closeLayer"></div>
+    </div>
+    <div class="allclearLayer" v-if="showAllclear">
       <div class="close" @click="closeLayer"></div>
     </div>
   </div>
@@ -93,6 +99,8 @@ import { setTimeout } from 'timers';
 export default {
   data() {
     return {
+      snum:1,
+      shareCount:0,
       prefix:config.prefix,
       stageNum:6,
       count:0,
@@ -110,6 +118,8 @@ export default {
       showCover: false,
       ruleLayer: false,
       endLayer: false,
+      failLayer:false,
+      showAllclear:false,
       currentQuiz: {
         id: null,
         title: '1.大陆河边有什么鸟',
@@ -131,7 +141,8 @@ export default {
           right_answer: -1,
           is_right: false
         }
-      ]
+      ],
+      timer: null
     };
   },
   computed: {
@@ -139,19 +150,19 @@ export default {
       return this.currentQuiz.right_answer-1
     },
     bonus(){
-      if(this.checkpoint==1){
+      if(this.snum==1){
         return 100
       }
-      if(this.checkpoint==2){
+      if(this.snum==2){
         return 180
       }
-      if(this.checkpoint==3){
+      if(this.snum==3){
         return 260
       }
-      if(this.checkpoint==4){
+      if(this.snum==4){
         return 380
       }
-      if(this.checkpoint==5){
+      if(this.snum==5){
         return 460
       }
     }
@@ -159,6 +170,34 @@ export default {
   methods: {
     bindTab(url) {
       wx.redirectTo({ url: url });
+    },
+    newStage() {
+      this.count--;
+      if (this.checkpoint >= 5){
+        this.showAllclear = true;
+        return
+      } else {
+        this.checkpoint++;
+      }
+      if (this.count <= 0) {
+        this.restart();
+        return
+      }
+      this.countNumber = 3;
+      this.showCountdown = true;
+      this.restart();
+      this.getList();
+      this.snum++;
+      this.timer = setInterval(() => {
+        if (this.countNumber > 0) {
+          this.countNumber--;
+        } else {
+          this.showCountdown = false;
+          clearInterval(this.timer);
+          return;
+        }
+      }, 1000);
+      // this.bindTab(`../quiz/main?stage_clear=${this.checkpoint}`);
     },
     chooseItem(index, item) {
       this.choiceIndex = index;
@@ -188,6 +227,17 @@ export default {
     closeLayer() {
       this.showCover = false;
       this.ruleLayer = false;
+      if (this.failLayer && this.count == 0) {
+        wx.navigateBack({
+          delta: 1 //返回的页面数，如果 delta 大于现有页面数，则返回到首页,
+        });
+      } else if (this.showAllclear) {
+        wx.navigateBack({
+          delta: 1 //返回的页面数，如果 delta 大于现有页面数，则返回到首页,
+        });
+      } else {
+        this.failLayer = false;
+      }
     },
     init(){
       this.choiceIndex = -1
@@ -263,12 +313,17 @@ export default {
       });
     },
     restart() {
-      if(this.count == 0) {
-        this.showCover = true
-        this.ruleLayer = true
-        return
+      if (this.count == 0) {
+        this.showCover = true;
+        if (this.shareCount == 0) {
+          this.failLayer = true;
+        } else {
+          this.ruleLayer = true;
+        }
+        return;
       }
       this.quizFail = false
+      this.quizSuccess = false;
       this.choiceIndex = -1
       this.showRight = -1
       this.showWrong = -1
@@ -277,6 +332,11 @@ export default {
       this.currentQuiz = this.questionList[0];
     },
     addCount() {
+      if (this.shareCount = 0) {
+        this.failLayer = true;
+        this.showCover = true;
+        return
+      }
       wx.request({
         url: config.base + 'quiz/addCount', //开发者服务器接口地址",
         data: {
@@ -307,67 +367,40 @@ export default {
   onLoad(option) {
     console.log(option.checkpoint);
     this.checkpoint = option.checkpoint;
+    this.snum = this.checkpoint;
     this.count = option.count;
+    this.shareCount = option.share_count;
   },
   onShow(option) {
     this.userCode = wx.getStorageSync("userCode");
+    this.showCountdown = true;
     this.getList()
-    setInterval(()=>{
-      if(this.countNumber > 0){
-        this.countNumber-- 
+    this.restart();
+    this.timer = setInterval(() => {
+      if (this.countNumber > 0) {
+        this.countNumber--;
       } else {
-        this.showCountdown = false
-        return
-      } 
-    },1000)
+        this.showCountdown = false;
+        clearInterval(this.timer);
+        return;
+      }
+    }, 1000);
   },
-  onHide() {
-    this.index = 0;
-    this.choiceIndex = -1;
-    this.currentQuiz = {
-      id: null,
-      title: null,
-      type: null,
-      tooltip: null,
-      quiz: null,
-      answer_list: [],
-      right_answer: null,
-      is_right: null
-    };
-    this.wrongAnswer = false;
-  },
+  onHide() {},
   onUnload() {
-    this.index = 0;
-    this.choiceIndex = -1;
-    this.currentQuiz = {
-      id: null,
-      title: null,
-      type: null,
-      tooltip: null,
-      quiz: null,
-      answer_list: [],
-      right_answer: null,
-      is_right: null
-    };
-    this.wrongAnswer = false;
+    this.countNumber = 3;
+    clearInterval(this.timer);
   },
   onShareAppMessage(result) {
-    let title = "青谷研习径";
-    let path = "/pages/index/main";
+    this.closeLayer();
+    this.addCount();
+    let title = "鹿咀自然课堂步道";
+    let path = "/pages/index/main?share_from=quiz";
     let imageUrl = "https://gw.alicdn.com/tfs/TB1uLyAnxjaK1RjSZKzXXXVwXXa-80-80.png";
     return {
       title,
       path,
-      imageUrl,
-      // desc,
-      success: res => {
-        console.log("success", res);
-        this.closeLayer();
-        this.addCount();
-      },
-      fail(e) {
-        console.log(e);
-      }
+      imageUrl
     };
   }
 };
@@ -635,5 +668,29 @@ export default {
   top: 20%;
   left: 0;right: 0;margin:auto;
   background: url('https://gw.alicdn.com/tfs/TB1nUYYwMHqK1RjSZFgXXa7JXXa-460-700.png') no-repeat top/cover;
+}
+.failLayer {
+  width: 500rpx;
+  height: 760rpx;
+  position: fixed;
+  z-index: 81;
+  top: 20%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: url("https://qg-line.oss-cn-shenzhen.aliyuncs.com/other/share_fail.png")
+    no-repeat top/cover;
+}
+.allclearLayer {
+  width: 500rpx;
+  height: 760rpx;
+  position: fixed;
+  z-index: 81;
+  top: 20%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: url("https://gw.alicdn.com/tfs/TB1Tx3mCXzqK1RjSZSgXXcpAVXa-191-291.png")
+    no-repeat top/cover;
 }
 </style>
