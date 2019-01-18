@@ -11,26 +11,31 @@
           <img src="https://gw.alicdn.com/tfs/TB1UADZwFYqK1RjSZLeXXbXppXa-68-61.png" class="my-tab-body-item-icon"/>
           <div class="my-tab-body-item-name">个人成就</div>
         </div>
+        <div class="my-tab-body-item-line"></div>
         <div class="my-tab-body-item" @click="bindTab('../my-rule/main')">
           <img src="https://gw.alicdn.com/tfs/TB1S6ruwSzqK1RjSZPcXXbTepXa-67-57.png" class="my-tab-body-item-icon"/>
           <div class="my-tab-body-item-name">行山礼仪</div>
         </div>
       </div>
+      <div class="my-tab-body-line"></div>
       <div class="my-tab-body">
         <div class="my-tab-body-item" @click="bindTab('../my-note/main')">
           <img src="https://gw.alicdn.com/tfs/TB1sP_WwH2pK1RjSZFsXXaNlXXa-71-60.png" class="my-tab-body-item-icon"/>
           <div class="my-tab-body-item-name">观察笔记</div>
         </div>
+        <div class="my-tab-body-item-line"></div>
         <div class="my-tab-body-item" @click="bindTab('../my-statement/main')">
           <img src="https://gw.alicdn.com/tfs/TB1inTWwH2pK1RjSZFsXXaNlXXa-68-60.png" class="my-tab-body-item-icon"/>
           <div class="my-tab-body-item-name">法律声明</div>
         </div>
       </div>
+      <div class="my-tab-body-line"></div>
       <div class="my-tab-body">
         <div class="my-tab-body-item" @click="bindTab('../my-suggest/main')">
           <img src="https://gw.alicdn.com/tfs/TB1cR2UwSzqK1RjSZPxXXc4tVXa-68-60.png" class="my-tab-body-item-icon"/>
           <div class="my-tab-body-item-name">意见反馈</div>
         </div>
+        <div class="my-tab-body-item-line"></div>
         <div class="my-tab-body-item" @click="bindTab('../my-about/main')">
           <img src="https://gw.alicdn.com/tfs/TB1yX6ZwFzqK1RjSZFvXXcB7VXa-68-59.png" class="my-tab-body-item-icon"/>
           <div class="my-tab-body-item-name">关于我们</div>
@@ -105,7 +110,7 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
-  background: url('https://gw.alicdn.com/tfs/TB1.MbVwSzqK1RjSZFLXXcn2XXa-640-1008.png') no-repeat top/cover;
+  background: url('https://gw.alicdn.com/tfs/TB1pZ9tA3HqK1RjSZFEXXcGMXXa-640-1016.png') no-repeat top/cover;
   .center();
 }
 .userPic{
@@ -139,7 +144,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 6% 25rpx;
+    margin: 0 25rpx;
     &-item{
       display: flex;
       align-items: center;
@@ -158,6 +163,16 @@ export default {
         font-size:30rpx;
         color:#000;
       }
+      &-line{
+        width: 1px;
+        height: 120rpx;
+        background: url('https://gw.alicdn.com/tfs/TB1V7amAVzqK1RjSZFvXXcB7VXa-1-116.png') no-repeat top/cover;
+      }
+    }
+    &-line{
+      margin: 0 25rpx;
+      height: 24rpx;
+      background: url('https://gw.alicdn.com/tfs/TB19ESrA3HqK1RjSZJnXXbNLpXa-602-18.png') no-repeat top/cover;
     }
   }
 }

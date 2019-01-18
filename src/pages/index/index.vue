@@ -1,5 +1,4 @@
 <template>
-  <!-- <div class="container" :style="{height:bodyHeight}"> -->
   <div class="container">
     <div class="index-tab">
       <div class="index-tab-item icon-list">
@@ -65,7 +64,8 @@
         >第五段 过店-鹿咀段</div>
       </div>
     </scroll-view>
-    <scroll-view scroll-y class="scroll">
+    <div class="scroll">
+    <!-- <scroll-view scroll-y class="scroll"> -->
       <div class="scroll-title">
         <img :src="titleSrc" class="scroll-title-pic">
         <img
@@ -77,7 +77,8 @@
           class="scroll-title-body"
         >
       </div>
-      <div class="spot" v-if="fullSpot.length>0">
+      <!-- <div class="spot" :style="{height:fullHeight+'rpx'}"> -->
+      <div class="spot">
         <div
           class="spot-item"
           v-for="(item,index) in fullSpot"
@@ -115,9 +116,10 @@
         mode="widthFix"
         src="https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png"
         class="scroll-bg"
-        @load="finishLoadImg"
+        @load="roadready"
       >
-    </scroll-view>
+    <!-- </scroll-view> -->
+    </div>
   </div>
 </template>
 
@@ -139,8 +141,6 @@ export default {
       isIPXS: false,
       isIP5: false,
       isPlus: false,
-      isPlaying: false,
-      innerAudioContext: wx.createInnerAudioContext(),
       showRoadSelect: false,
       tab1: false,
       tab2: false,
@@ -151,19 +151,6 @@ export default {
   },
 
   computed: {
-    bodyHeight() {
-      let full_h;
-      full_h = 620;
-      if (this.isIPX) {
-        full_h = 444;
-      } else if (this.isIPXS) {
-        full_h = 444;
-      } else if (this.isIP5) {
-        full_h = 545;
-      }
-      let h = parseInt(full_h);
-      return `${h}%`;
-    },
     margin() {
       if (this.isPlus || this.isIP5) {
         return `7.43%`;
@@ -193,8 +180,7 @@ export default {
   components: {},
 
   methods: {
-    finishLoadImg(e) {
-      console.log(e.target);
+    roadready(e) {
       this.fullHeight = e.target.height;
     },
     setStorage(key, val) {
@@ -232,22 +218,34 @@ export default {
           this.lineIndex = 0;
           break;
         case 2:
-          top = this.isIP5 ? 1600 : 1800;
+          top = this.isIP5 ? 1700 : 2000;
+          if (this.isPlus) {
+            top = 2100;
+          }
           this.activeIndex = 30;
           this.lineIndex = 1;
           break;
         case 3:
-          top = this.isIP5 ? 2000 : 2200;
+          top = this.isIP5 ? 2100 : 2500;
+          if (this.isPlus) {
+            top = 2850;
+          }
           this.activeIndex = 38;
           this.lineIndex = 2;
           break;
         case 4:
-          top = this.isIP5 ? 2350 : 2700;
+          top = this.isIP5 ? 2700 : 3200;
+          if (this.isPlus) {
+            top = 3600;
+          }
           this.activeIndex = 48;
           this.lineIndex = 3;
           break;
         case 5:
-          top = this.isIP5 ? 3000 : 3350;
+          top = this.isIP5 ? 3000 : 3800;
+          if (this.isPlus) {
+            top = 4300;
+          }
           this.activeIndex = 58;
           this.lineIndex = 4;
           break;
@@ -274,60 +272,6 @@ export default {
     firstSpot() {
       this.activeIndex = 1;
       this.currentSpot = this.spotList[0];
-    },
-    playAudio() {
-      // console.log(this.currentSpot.spot_id)
-      if (this.isPlaying) {
-        this.innerAudioContext.stop();
-        this.isPlaying = false;
-        return;
-      }
-      wx.request({
-        url: config.base + "attraction/listdetail", //开发者服务器接口地址",
-        data: {
-          spot_id: this.currentSpot.spot_id
-        }, //请求的参数",
-        method: "GET",
-        dataType: "json", //如果设为json，会尝试对返回的数据做一次 JSON.parse
-        success: res => {
-          console.log(res.data.data);
-          this.audioUrl =
-            res.data.data.audio_url == null
-              ? ""
-              : config.prefix + res.data.data.audio_url;
-          if (this.audioUrl) {
-            this.innerAudioContext.src = this.audioUrl;
-            this.innerAudioContext.play();
-            this.isPlaying = true;
-          }
-        },
-        fail: () => {},
-        complete: () => {}
-      });
-    },
-    login(code) {
-      const userInfo = wx.getStorageSync("userInfo");
-      wx.request({
-        url: config.base + "wxlogin/login",
-        data: {
-          code: code,
-          lineId: config.lineId,
-          nickName: userInfo.nickName,
-          avatarUrl: userInfo.avatarUrl,
-          city: userInfo.city,
-          province: userInfo.province,
-          country: userInfo.country
-        },
-        method: "GET",
-        dataType: "json",
-        success: res => {
-          // console.log('login',res.data.data)
-          this.setStorage("userCode", res.data.data);
-        },
-        fail: err => {
-          console.log("hasError", err);
-        }
-      });
     },
     getSpot() {
       const self = this;
@@ -429,8 +373,16 @@ export default {
     }
   },
   mounted() {},
-  onLoad() {
-    this.getSpot();
+  onLoad(option) {
+    if (option.share_from) {
+      if (option.share_from === "list") {
+        this.bindTab(
+          `../${option.share_from}/main?spot_index=${option.spot_index}`
+        );
+      } else {
+        this.bindTab(`../${option.share_from}/main`);
+      }
+    }
     // 判断是否第一次使用
     const firsttime = wx.getStorageSync("firsttime");
     if (!firsttime) {
@@ -439,6 +391,7 @@ export default {
     } else {
       console.log(firsttime);
     }
+    this.getSpot();
     wx.getSystemInfo({
       success: res => {
         console.log("model", res);
@@ -463,14 +416,9 @@ export default {
       }
     });
   },
-  onReady() {
-    // this.toView = 'spot12'
-  },
+  onReady() {},
   onShow() {},
-  onHide() {
-    this.isPlaying = false;
-    this.innerAudioContext.stop();
-  }
+  onHide() {}
 };
 </script>
 
@@ -479,7 +427,8 @@ export default {
 .container {
   position: relative;
   overflow: hidden;
-  height: 8264rpx;
+  height: 9100rpx;
+  background: url("https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png") no-repeat top/cover;
 }
 .navi {
   height: 78rpx;
@@ -615,6 +564,8 @@ export default {
 .scroll {
   position: relative;
   top: 78rpx;
+  // height: 100%;
+  // background: url("https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png") no-repeat top/cover;
   &-title {
     width: 402rpx;
     height: 234rpx;
@@ -661,7 +612,7 @@ export default {
   }
   &-bg {
     width: 100%;
-    height: 8186rpx;
+    // height: 100%;
   }
 }
 .index-tab {

@@ -20,10 +20,10 @@
     </div>
     <div class="main">
       <div class="main-share">
-         <button class="main-share-item" open-type="share">
+         <button class="main-share-item" data-name="person" open-type="share">
           <img src="https://gw.alicdn.com/tfs/TB1CAWCqNnaK1RjSZFtXXbC2VXa-36-33.png" alt=""> 炫耀战绩
          </button>
-         <button class="main-share-item" open-type="share">
+         <button class="main-share-item" data-name="program" open-type="share">
           <img src="https://gw.alicdn.com/tfs/TB1AiyeqQvoK1RjSZPfXXXPKFXa-27-32.png" alt=""> 分享到微信群
          </button>
       </div>
@@ -38,8 +38,9 @@
               <span>兑换1个勋章</span>
             </div>
             <div class="main-body-list-item-right">
-              <span v-if="exchange1">兑换成功</span>
-              <span v-else @click="openLayer(150)">立即兑换</span>
+              <!-- <span v-if="exchange1">兑换成功</span> -->
+              <!-- <span v-else @click="openLayer(150)">立即兑换</span> -->
+              <span @click="openLayer(150)">立即兑换</span>
             </div>
           </div>
           <div class="main-body-list-item">
@@ -48,8 +49,9 @@
               <span>兑换3个勋章</span>
             </div>
             <div class="main-body-list-item-right">
-              <span v-if="exchange2">兑换成功</span>
-              <span v-else @click="openLayer(200)">立即兑换</span>
+              <!-- <span v-if="exchange2">兑换成功</span> -->
+              <!-- <span v-else @click="openLayer(200)">立即兑换</span> -->
+              <span @click="openLayer(200)">立即兑换</span>
             </div>
           </div>
           <div class="main-body-list-item">
@@ -58,8 +60,9 @@
               <span>兑换10个勋章</span>
             </div>
             <div class="main-body-list-item-right">
-              <span v-if="exchange3">兑换成功</span>
-              <span v-else @click="openLayer(480)">立即兑换</span>
+              <!-- <span v-if="exchange3">兑换成功</span> -->
+              <!-- <span v-else @click="openLayer(480)">立即兑换</span> -->
+              <span @click="openLayer(480)">立即兑换</span>
             </div>
           </div>
         </div>
@@ -155,19 +158,20 @@ export default {
           console.log(res.data);
           this.closeLayer();
           if (res.data.res_code == 0) {
-            this.level = res.data.data.count;
-            if (coin == 150) {
-              this.exchange1 = true;
-              return;
-            }
-            if (coin == 200) {
-              this.exchange2 = true;
-              return;
-            }
-            if (coin == 480) {
-              this.exchange3 = true;
-              return;
-            }
+            this.getLevel();
+            this.loadCheckPoint();
+            // if (coin == 150) {
+            //   this.exchange1 = true;
+            //   return;
+            // }
+            // if (coin == 200) {
+            //   this.exchange2 = true;
+            //   return;
+            // }
+            // if (coin == 480) {
+            //   this.exchange3 = true;
+            //   return;
+            // }
           } else {
             wx.showToast({
               title: res.data.res_msg, //提示的内容,
@@ -213,10 +217,16 @@ export default {
     this.getLevel();
   },
   onShareAppMessage(result) {
-    let title = `我已获得${this.level}个勋章`;
-    let path = "/pages/index/main";
-    let imageUrl =
-      "https://etx.forestvisual.com/File/Download?fileName=poetry/share.png&fileType=QGLineFile";
+    let name = result.target.dataset.name;
+    // let title = `我已获得${this.level}个勋章`;
+    let title = `鹿咀自然课堂步道`;
+    let path, imageUrl;
+    if (name == "person") {
+      path = "/pages/index/main?share_from=quiz";
+    } else {
+      path = "/pages/index/main";
+      imageUrl = "https://qg-line.oss-cn-shenzhen.aliyuncs.com/other/share.jpg";
+    }
     return {
       title,
       path,
