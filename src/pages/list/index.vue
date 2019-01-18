@@ -157,10 +157,7 @@ export default {
           // this.articleData = res.data.data.items
           this.articleData = this.formatDetail(res.data.data.items);
           this.innerAudioContext = wx.createInnerAudioContext();
-          this.audioUrl =
-            res.data.data.audio_url == null
-              ? ""
-              : config.prefix + res.data.data.audio_url;
+          this.audioUrl = res.data.data.audio_url;
           this.videoUrl =
             res.data.data.video_url == null
               ? ""
