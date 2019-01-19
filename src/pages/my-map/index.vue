@@ -189,9 +189,8 @@ export default {
           this.polygons = [
             {
               points: data,
-              strokeColor: "#258a57AA",
-              // fillColor: "#258a57AA"
-              fillColor: "#22258a57"
+              strokeColor: "#50B028AA",
+              fillColor: "#A3D49257"
             }
           ];
         }
@@ -446,7 +445,7 @@ export default {
       if (type === -1) {
         return `../../assets/map-audio/${number}.png`;
       } else {
-        return `../../assets/map-poetry/${number}.png`;
+        return `../../assets/map-normal/${number}.png`;
       }
     }
   },
