@@ -7,7 +7,7 @@
       <div class="index-tab-item icon-map" @click="bindTab('../my-map/main?queryType=0')">
         <img src="https://gw.alicdn.com/tfs/TB1fwGTv4TpK1RjSZR0XXbEwXXa-104-96.png" alt>
       </div>
-      <div class="index-tab-item icon-audio" @click="playAudio">
+      <div class="index-tab-item icon-audio" @click="toggleAutoPlay">
         <img
           src="https://gw.alicdn.com/tfs/TB1OCGWv4TpK1RjSZFGXXcHqFXa-104-95.png"
           alt
@@ -65,7 +65,7 @@
       </div>
     </scroll-view>
     <div class="scroll">
-    <!-- <scroll-view scroll-y class="scroll"> -->
+      <!-- <scroll-view scroll-y class="scroll"> -->
       <div class="scroll-title">
         <img :src="titleSrc" class="scroll-title-pic">
         <img
@@ -118,7 +118,7 @@
         class="scroll-bg"
         @load="roadready"
       >
-    <!-- </scroll-view> -->
+      <!-- </scroll-view> -->
     </div>
   </div>
 </template>
@@ -130,6 +130,7 @@ export default {
   data() {
     return {
       prefix: config.prefix,
+      innerAudioContext: wx.createInnerAudioContext(),
       currentSpot: {},
       fullHeight: "",
       activeIndex: 1,
@@ -146,7 +147,8 @@ export default {
       tab2: false,
       lineIndex: 98,
       windowHeight: 0,
-      firstY: 0
+      firstY: 0,
+      isPlaying: false
     };
   },
 
@@ -180,6 +182,39 @@ export default {
   components: {},
 
   methods: {
+    toggleAutoPlay() {
+      this.isPlaying = !this.isPlaying;
+      if (this.isPlaying) {
+        this.playAudio();
+      } else {
+        this.stopAudio();
+      }
+    },
+    playAudio() {
+      // console.log(this.currentSpot.spot_id)
+      if (!this.isPlaying) {
+        return;
+      }
+      wx.request({
+        url: config.base + "attraction/listdetail", //开发者服务器接口地址",
+        data: {
+          spot_id: this.currentSpot.spot_id
+        }, //请求的参数",
+        method: "GET",
+        dataType: "json", //如果设为json，会尝试对返回的数据做一次 JSON.parse
+        success: res => {
+          console.log(res.data.data);
+          this.audioUrl = res.data.data.audio_url;
+          if (this.audioUrl) {
+            this.innerAudioContext.src = this.audioUrl;
+            this.innerAudioContext.play();
+          }
+        }
+      });
+    },
+    stopAudio() {
+      this.innerAudioContext.stop();
+    },
     roadready(e) {
       this.fullHeight = e.target.height;
     },
@@ -264,20 +299,28 @@ export default {
       this.tab1 = false;
     },
     chooseSpot(item, index) {
-      this.activeIndex == index + 1
-        ? (this.activeIndex = -1)
-        : (this.activeIndex = index + 1);
-      this.currentSpot = this.spotList[this.activeIndex - 1];
+      console.log("chooseSpot", item, index);
+      this.activeIndex = index + 1;
+      this.currentSpot = this.spotList[index];
+
+      if (this.isPlaying) {
+        this.stopAudio();
+        this.playAudio();
+      }
     },
     firstSpot() {
       this.activeIndex = 1;
       this.currentSpot = this.spotList[0];
+      if (this.isPlaying) {
+        this.stopAudio();
+        this.playAudio();
+      }
     },
     getSpot() {
       const self = this;
       let process = data => {
-        this.spotList = storageData;
-        this.currentSpot = storageData[0] || [];
+        this.spotList = data;
+        this.currentSpot = data[0];
         this.fullSpot.length = 0;
         for (let i = 0; i <= data.length; i++) {
           let item = { num: i + 1, y: this._fy(i) };
@@ -416,9 +459,30 @@ export default {
       }
     });
   },
+  created() {
+    this.innerAudioContext.onPlay(() => {
+      console.log("audio play");
+    });
+    this.innerAudioContext.onEnded(() => {
+      console.log("audio end");
+      let index = this.spotList.indexOf(this.currentSpot);
+      console.log(index);
+      if (this.spotList[index + 1]) {
+        this.chooseSpot(null, index + 1);
+      }
+    });
+    // this.toView = 'spot12'
+  },
   onReady() {},
   onShow() {},
-  onHide() {}
+  onHide() {
+    this.isPlaying = false;
+    this.innerAudioContext.stop();
+  },
+  onUnload() {
+    this.isPlaying = false;
+    this.innerAudioContext.stop();
+  }
 };
 </script>
 
@@ -428,7 +492,8 @@ export default {
   position: relative;
   overflow: hidden;
   height: 9100rpx;
-  background: url("https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png") no-repeat top/cover;
+  background: url("https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png")
+    no-repeat top/cover;
 }
 .navi {
   height: 78rpx;
