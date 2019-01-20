@@ -6,10 +6,9 @@
     <open-data type="userNickName" class="userName"></open-data>
     <div class="my-tab">
       <div class="my-tab-body">
-        <div class="my-tab-body-item" @click="bindTab('../my-reward/main')">
-        <!-- <div class="my-tab-body-item" @click="bindTab('../developing/main')"> -->
-          <img src="https://gw.alicdn.com/tfs/TB1UADZwFYqK1RjSZLeXXbXppXa-68-61.png" class="my-tab-body-item-icon"/>
-          <div class="my-tab-body-item-name">个人成就</div>
+        <div class="my-tab-body-item" @click="bindTab('../my-note/main')">
+          <img src="https://gw.alicdn.com/tfs/TB1sP_WwH2pK1RjSZFsXXaNlXXa-71-60.png" class="my-tab-body-item-icon"/>
+          <div class="my-tab-body-item-name">观察笔记</div>
         </div>
         <div class="my-tab-body-item-line"></div>
         <div class="my-tab-body-item" @click="bindTab('../my-rule/main')">
@@ -19,9 +18,9 @@
       </div>
       <div class="my-tab-body-line"></div>
       <div class="my-tab-body">
-        <div class="my-tab-body-item" @click="bindTab('../my-note/main')">
-          <img src="https://gw.alicdn.com/tfs/TB1sP_WwH2pK1RjSZFsXXaNlXXa-71-60.png" class="my-tab-body-item-icon"/>
-          <div class="my-tab-body-item-name">观察笔记</div>
+        <div class="my-tab-body-item" @click="bindTab('../my-suggest/main')">
+          <img src="https://gw.alicdn.com/tfs/TB1cR2UwSzqK1RjSZPxXXc4tVXa-68-60.png" class="my-tab-body-item-icon"/>
+          <div class="my-tab-body-item-name">意见反馈</div>
         </div>
         <div class="my-tab-body-item-line"></div>
         <div class="my-tab-body-item" @click="bindTab('../my-statement/main')">
@@ -31,15 +30,15 @@
       </div>
       <div class="my-tab-body-line"></div>
       <div class="my-tab-body">
-        <div class="my-tab-body-item" @click="bindTab('../my-suggest/main')">
-          <img src="https://gw.alicdn.com/tfs/TB1cR2UwSzqK1RjSZPxXXc4tVXa-68-60.png" class="my-tab-body-item-icon"/>
-          <div class="my-tab-body-item-name">意见反馈</div>
-        </div>
-        <div class="my-tab-body-item-line"></div>
         <div class="my-tab-body-item" @click="bindTab('../my-about/main')">
           <img src="https://gw.alicdn.com/tfs/TB1yX6ZwFzqK1RjSZFvXXcB7VXa-68-59.png" class="my-tab-body-item-icon"/>
           <div class="my-tab-body-item-name">关于我们</div>
         </div>
+        <!-- <div class="my-tab-body-item-line"></div> -->
+        <!-- <div class="my-tab-body-item" @click="bindTab('../my-reward/main')">
+          <img src="https://gw.alicdn.com/tfs/TB1UADZwFYqK1RjSZLeXXbXppXa-68-61.png" class="my-tab-body-item-icon"/>
+          <div class="my-tab-body-item-name">个人成就</div>
+        </div> -->
       </div>
     </div>
   </div>

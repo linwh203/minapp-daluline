@@ -25,10 +25,9 @@
       <div class="index-tab-item icon-scan" @click="bindTab('../scan/main')">
         <img src="https://gw.alicdn.com/tfs/TB1isa6v3HqK1RjSZFkXXX.WFXa-104-96.png" alt>
       </div>
-      <div class="index-tab-item icon-quiz" @click="bindTab('../quiz/main')">
-        <!-- <div class="index-tab-item icon-quiz" @click="bindTab('../developing/main')"> -->
+      <!-- <div class="index-tab-item icon-quiz" @click="bindTab('../quiz/main')">
         <img src="https://gw.alicdn.com/tfs/TB1OOfmv4jaK1RjSZKzXXXVwXXa-104-96.png" alt>
-      </div>
+      </div> -->
       <div class="index-tab-item icon-my" @click="bindTab('../my/main')">
         <img src="https://gw.alicdn.com/tfs/TB1q8Tmv4jaK1RjSZKzXXXVwXXa-105-95.png" alt>
       </div>

@@ -47,7 +47,7 @@
     <div class="cover" v-if="showCover"></div>
     <div class="ruleLayer" v-if="showCover">
       <scroll-view scroll-y class="ruleLayer-main">
-        <img mode="widthFix" src="https://gw.alicdn.com/tfs/TB1JJHuAVzqK1RjSZSgXXcpAVXa-460-1738.png" alt="">
+        <img mode="widthFix" src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/Other/Copyright.jpg" alt="">
       </scroll-view>
       <div class="close" @click="showCover = false"></div>
     </div>
