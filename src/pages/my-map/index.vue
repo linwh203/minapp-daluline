@@ -24,7 +24,7 @@
       <cover-view class="reset" @click="resetPosition">
         <cover-image
           class="img"
-          src="https://qg-line.oss-cn-shenzhen.aliyuncs.com/map/map-position.png"
+          src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/Other/map-position.png"
         />
       </cover-view>
       <!-- <img class="img" src="../../assets/reset.png">
@@ -32,6 +32,12 @@
       <img class="img" src="../../assets/spot-highlight.png">-->
     </map>
     <div class="modal">
+      <img
+        mode="widthFix"
+        v-if="!currSpot"
+        class="def"
+        src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/Other/map_legend.png"
+      >
       <div
         v-if="currSpot"
         class="spot-item-window"
@@ -521,6 +527,10 @@ export default {
     bottom: 0rpx;
     width: 100%;
     height: 176rpx;
+
+    .def {
+      width: 100%;
+    }
   }
 
   .spot-item-window {
