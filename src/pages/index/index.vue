@@ -256,6 +256,9 @@ export default {
           if (this.isPlus) {
             top = 2100;
           }
+          if (this.isIPX) {
+            top = 1900;
+          }
           this.activeIndex = 30;
           this.lineIndex = 1;
           break;
@@ -264,6 +267,9 @@ export default {
           if (this.isPlus) {
             top = 2850;
           }
+          if (this.isIPX) {
+            top = 2400;
+          }
           this.activeIndex = 38;
           this.lineIndex = 2;
           break;
@@ -271,6 +277,9 @@ export default {
           top = this.isIP5 ? 2700 : 3200;
           if (this.isPlus) {
             top = 3600;
+          }
+          if (this.isIPX) {
+            top = 3000;
           }
           this.activeIndex = 48;
           this.lineIndex = 3;
