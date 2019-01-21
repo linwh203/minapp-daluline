@@ -711,7 +711,7 @@ export default {
 }
 .index-tab {
   position: fixed;
-  top: 93rpx;
+  top: 133rpx;
   right: 20rpx;
   display: flex;
   flex-direction: column;
