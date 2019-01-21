@@ -56,6 +56,7 @@ export default {
     },
     autoClose() {
       this.tForAutoClose = setTimeout(() => {
+        console.log("auto close");
         this.bindNext();
       }, 5000);
     },
@@ -121,11 +122,11 @@ export default {
       this.motto = false;
     }
   },
-
-  created() {
+  onUnload() {
     // 调用应用实例的方法获取全局数据
     this.getUser();
-  }
+  },
+  created() {}
 };
 </script>
 

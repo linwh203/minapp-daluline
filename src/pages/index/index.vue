@@ -2,34 +2,34 @@
   <div class="container">
     <div class="index-tab">
       <div class="index-tab-item icon-list">
-        <img src="https://gw.alicdn.com/tfs/TB1v2WWv7voK1RjSZPfXXXPKFXa-107-105.png">
+        <img src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/menu_top.png">
       </div>
       <div class="index-tab-item icon-map" @click="bindTab('../my-map/main?queryType=0')">
-        <img src="https://gw.alicdn.com/tfs/TB1fwGTv4TpK1RjSZR0XXbEwXXa-104-96.png" alt>
+        <img src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/menu_map.png" alt>
       </div>
       <div class="index-tab-item icon-audio" @click="toggleAutoPlay">
         <img
-          src="https://gw.alicdn.com/tfs/TB1OCGWv4TpK1RjSZFGXXcHqFXa-104-95.png"
+          src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/menu_audio_play.png"
           alt
           v-if="!isPlaying"
         >
         <img
-          src="https://gw.alicdn.com/tfs/TB1N1O0v9zqK1RjSZFpXXakSXXa-104-95.png"
+          src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/menu_audio_stop.png"
           alt
           v-if="isPlaying"
         >
       </div>
       <div class="index-tab-item icon-video" @click="bindTab('../video-list/main')">
-        <img src="https://gw.alicdn.com/tfs/TB1gTqYv9zqK1RjSZFHXXb3CpXa-104-96.png">
+        <img src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/menu_video.png">
       </div>
       <div class="index-tab-item icon-scan" @click="bindTab('../scan/main')">
-        <img src="https://gw.alicdn.com/tfs/TB1isa6v3HqK1RjSZFkXXX.WFXa-104-96.png" alt>
+        <img src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/menu_photo.png" alt>
       </div>
       <!-- <div class="index-tab-item icon-quiz" @click="bindTab('../quiz/main')">
         <img src="https://gw.alicdn.com/tfs/TB1OOfmv4jaK1RjSZKzXXXVwXXa-104-96.png" alt>
       </div>-->
       <div class="index-tab-item icon-my" @click="bindTab('../my/main')">
-        <img src="https://gw.alicdn.com/tfs/TB1q8Tmv4jaK1RjSZKzXXXVwXXa-105-95.png" alt>
+        <img src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/menu_center.png" alt>
       </div>
       <div class="index-tab-line"></div>
     </div>
@@ -111,17 +111,28 @@
           </div>
         </div>
       </div>
-      <img
+      <!-- <img
         mode="widthFix"
         src="https://gw.alicdn.com/tfs/TB1HJvXv4TpK1RjSZFGXXcHqFXa-519-6810.png"
+        class="scroll-road"
+      >-->
+      <img
+        mode="widthFix"
+        src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/background_road.png"
         class="scroll-road"
       >
       <img
         mode="widthFix"
-        src="https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png"
+        src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/background.png"
         class="scroll-bg"
         @load="roadready"
       >
+      <!-- <img
+        mode="widthFix"
+        src="https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png"
+        class="scroll-bg"
+        @load="roadready"
+      >-->
       <!-- </scroll-view> -->
     </div>
   </div>
@@ -530,7 +541,7 @@ export default {
   // top: 2.8%;
   &-item.active {
     position: relative;
-    background: url("https://gw.alicdn.com/tfs/TB1k55YvYPpK1RjSZFFXXa5PpXa-72-72.png")
+    background: url("https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/green.png")
       no-repeat center/100%;
   }
   &-item.active:after {
@@ -554,7 +565,7 @@ export default {
     text-align: center;
     color: #fff;
     font-size: 34rpx;
-    background: url("https://gw.alicdn.com/tfs/TB1yx12v5rpK1RjSZFhXXXSdXXa-72-72.png")
+    background: url("https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/gray.png")
       no-repeat center/100%;
     margin-bottom: 7.27%;
     &-window {
