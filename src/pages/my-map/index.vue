@@ -196,6 +196,7 @@ export default {
             {
               points: data,
               strokeColor: "#50B028AA",
+              strokeWidth: 4,
               fillColor: "#A3D49257"
             }
           ];
