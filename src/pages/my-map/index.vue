@@ -33,7 +33,6 @@
     </map>
     <div class="modal">
       <img
-        mode="widthFix"
         v-if="!currSpot"
         class="def"
         src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/Other/map_legend.png"
@@ -531,6 +530,7 @@ export default {
 
     .def {
       width: 100%;
+      height: 100%;
     }
   }
 
