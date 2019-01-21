@@ -7,7 +7,7 @@
     </div>
     <div class="modal" v-if="motto">
       <div class="modal-container">
-        <img src="https://gw.alicdn.com/tfs/TB18bz7vOLaK1RjSZFxXXamPFXa-544-700.png" alt>
+        <img src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/Other/login.png" alt>
         <button
           class="auth-confirm"
           open-type="getUserInfo"
