@@ -31,7 +31,7 @@
     <div class="modal" v-if="showResult" @click="init"></div>
     <div class="waiting" v-if="isWaiting">
       <div class="text">努力识别中...</div>
-      <img src="../../assets/waiting.png" alt>
+      <img src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/photo/loading.png" alt>
       <div class="sub-text">不要着急,马上有结果</div>
     </div>
     <div class="result-tab" v-if="showResult">
@@ -389,7 +389,7 @@ img {
     animation: spin 6s linear infinite;
   }
   .text {
-    color: #00cbff;
+    color: #2b9f62;
     font-size: 60rpx;
     line-height: 120rpx;
     margin-bottom: 30rpx;
