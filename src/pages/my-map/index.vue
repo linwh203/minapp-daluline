@@ -605,9 +605,10 @@ export default {
 }
 .reset {
   position: absolute;
-  bottom: 10rpx;
-  right: 20rpx;
-  transform: scale(0.8);
+  bottom: 30rpx;
+  right: 30rpx;
+  // transform: scale(0.5);
+  width: 44px;
   img {
     width: 48rpx;
     height: 48rpx;

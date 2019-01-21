@@ -111,16 +111,16 @@
           </div>
         </div>
       </div>
-      <!-- <img
+      <img
         mode="widthFix"
         src="https://gw.alicdn.com/tfs/TB1HJvXv4TpK1RjSZFGXXcHqFXa-519-6810.png"
         class="scroll-road"
-      >-->
-      <img
+      >
+      <!-- <img
         mode="widthFix"
         src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/background_road.png"
         class="scroll-road"
-      >
+      >-->
       <img
         mode="widthFix"
         src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/background.png"
