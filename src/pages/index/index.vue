@@ -27,7 +27,7 @@
       </div>
       <!-- <div class="index-tab-item icon-quiz" @click="bindTab('../quiz/main')">
         <img src="https://gw.alicdn.com/tfs/TB1OOfmv4jaK1RjSZKzXXXVwXXa-104-96.png" alt>
-      </div> -->
+      </div>-->
       <div class="index-tab-item icon-my" @click="bindTab('../my/main')">
         <img src="https://gw.alicdn.com/tfs/TB1q8Tmv4jaK1RjSZKzXXXVwXXa-105-95.png" alt>
       </div>
@@ -494,8 +494,9 @@ export default {
   background: url("https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png")
     no-repeat top/cover;
 }
+@navHeight: 98rpx;
 .navi {
-  height: 78rpx;
+  height: @navHeight;
   background: #fff;
   color: #101010;
   display: flex;
@@ -627,7 +628,7 @@ export default {
 }
 .scroll {
   position: relative;
-  top: 78rpx;
+  top: @navHeight;
   // height: 100%;
   // background: url("https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png") no-repeat top/cover;
   &-title {
