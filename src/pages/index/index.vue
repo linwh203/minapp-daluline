@@ -66,7 +66,12 @@
     <div class="scroll">
       <!-- <scroll-view scroll-y class="scroll"> -->
       <div class="scroll-title">
-        <img :src="titleSrc" class="scroll-title-pic">
+        <img
+          class="logo"
+          src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/List/list_logo.png"
+          mode="aspectFit"
+        >
+        <!-- <img :src="titleSrc" class="scroll-title-pic">
         <img
           src="https://gw.alicdn.com/tfs/TB1ZJh6mSzqK1RjSZPxXXc4tVXa-245-52.png"
           class="scroll-title-text"
@@ -74,7 +79,7 @@
         <img
           src="https://gw.alicdn.com/tfs/TB1CQ53v7voK1RjSZFNXXcxMVXa-343-214.png"
           class="scroll-title-body"
-        >
+        >-->
       </div>
       <!-- <div class="spot" :style="{height:fullHeight+'rpx'}"> -->
       <div class="spot">
@@ -633,13 +638,17 @@ export default {
   // background: url("https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png") no-repeat top/cover;
   &-title {
     width: 402rpx;
-    height: 234rpx;
+    height: 278rpx;
     position: absolute;
     top: 0.1%;
     left: 0;
     right: 0;
     margin: auto;
     z-index: 21;
+    .logo {
+      width: 100%;
+      height: 100%;
+    }
     &-body {
       width: 402rpx;
       height: 210rpx;
