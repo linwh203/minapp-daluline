@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <div class="first-visit">
-      <img src="https://gw.alicdn.com/tfs/TB1F9nJvIfpK1RjSZFOXXa6nFXa-640-1136.png" alt>
+      <img src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/Other/introduction.jpg" alt>
+      <!-- <img src="https://gw.alicdn.com/tfs/TB1F9nJvIfpK1RjSZFOXXa6nFXa-640-1136.png" alt> -->
       <div class="close-btn" @click="bindNext"></div>
     </div>
     <div class="modal" v-if="motto">
