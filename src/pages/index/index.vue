@@ -581,7 +581,7 @@ export default {
       width: 522rpx;
       height: 176rpx;
       border-bottom: 1px solid #c7c7c7;
-      background: url("https://gw.alicdn.com/tfs/TB1.crTvQvoK1RjSZFNXXcxMVXa-500-168.png")
+      background: url("https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/knowledge%20_summary.png")
         no-repeat center/contain;
       position: absolute;
       bottom: 106rpx;
