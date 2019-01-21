@@ -26,7 +26,8 @@ export default {
     return {
       isMock: false,
       // isMock: true,
-      motto: false
+      motto: false,
+      tForAutoClose: undefined
     };
   },
 
@@ -48,9 +49,15 @@ export default {
       }
     },
     bindNext() {
+      clearTimeout(this.tForAutoClose);
       wx.setStorageSync("firsttime", true);
       const url = "../index/main";
       wx.redirectTo({ url: url });
+    },
+    autoClose() {
+      this.tForAutoClose = setTimeout(() => {
+        this.bindNext();
+      }, 5000);
     },
     getUser() {
       if (this.isMock) {
@@ -69,6 +76,7 @@ export default {
                 console.log("first page", res.userInfo);
               }
             });
+            that.autoClose();
           } else {
             that.motto = true;
           }
