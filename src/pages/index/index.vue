@@ -178,18 +178,18 @@ export default {
       const a = this.activeIndex % 6;
       switch (a) {
         case 0:
-          return -260;
+          return -140;
         case 1:
-          return -120;
+          return -30;
         case 2:
           // 处女座说,必须调整,所以0改成-16
-          return -82;
+          return -120;
         case 3:
-          return -216;
+          return -280;
         case 4:
-          return -340;
+          return -400;
         case 5:
-          return -360;
+          return -280;
       }
     }
   },
