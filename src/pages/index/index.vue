@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="index-tab">
-      <div class="index-tab-item icon-list">
+      <div class="index-tab-item icon-list first">
         <img src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/menu_top.png">
       </div>
       <div class="index-tab-item icon-map" @click="bindTab('../my-map/main?queryType=0')">
@@ -116,20 +116,20 @@
         src="https://gw.alicdn.com/tfs/TB1HJvXv4TpK1RjSZFGXXcHqFXa-519-6810.png"
         class="scroll-road"
       >-->
-      <img
-        mode="widthFix"
-        src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/background_road.png"
-        class="scroll-road"
-      >
       <!-- <img
         mode="widthFix"
-        src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/background.png"
+        src="https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png"
         class="scroll-bg"
         @load="roadready"
       >-->
       <img
         mode="widthFix"
-        src="https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png"
+        src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/background_road.png"
+        class="scroll-road"
+      >
+      <img
+        mode="widthFix"
+        src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/background.png"
         class="scroll-bg"
         @load="roadready"
       >
@@ -180,7 +180,7 @@ export default {
         case 0:
           return -140;
         case 1:
-          return -30;
+          return -20;
         case 2:
           // 处女座说,必须调整,所以0改成-16
           return -120;
@@ -424,7 +424,7 @@ export default {
     },
     _getMarginYDict() {
       let arr = [
-        5.46,
+        5.26,
         15.235,
         24.94,
         34.74,
@@ -516,8 +516,9 @@ export default {
   position: relative;
   overflow: hidden;
   height: 9100rpx;
-  background: url("https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png")
-    no-repeat top/cover;
+  background: #b4deda;
+  // background: url("https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png")
+  //   no-repeat top/cover;
 }
 @navHeight: 98rpx;
 .navi {
@@ -633,22 +634,22 @@ export default {
     }
   }
   &-item:nth-of-type(6n + 2) {
-    margin-left: 50%;
+    margin-left: 52%;
   }
   &-item:nth-of-type(6n + 3) {
-    margin-left: 30%;
+    margin-left: 32%;
   }
   &-item:nth-of-type(6n + 1) {
-    margin-left: 68%;
+    margin-left: 70%;
   }
   &-item:nth-of-type(6n + 4) {
-    margin-left: 13%;
+    margin-left: 15%;
   }
   &-item:nth-of-type(6n) {
-    margin-left: 50%;
+    margin-left: 52%;
   }
   &-item:nth-of-type(6n + 5) {
-    margin-left: 30%;
+    margin-left: 32%;
   }
 }
 .scroll {
@@ -719,11 +720,15 @@ export default {
   align-items: center;
   z-index: 21;
   &-item {
-    width: 120rpx;
-    height: 110rpx;
+    width: 109rpx;
+    height: 95rpx;
     margin-bottom: 36rpx;
     position: relative;
     z-index: 23;
+    // transform: scale(1.1);
+    &.first {
+      height: 114rpx;
+    }
   }
   &-line {
     width: 1px;
@@ -734,7 +739,7 @@ export default {
     background-position: center;
     position: absolute;
     top: 10rpx;
-    right: 44rpx;
+    right: 39rpx;
     z-index: 22;
   }
   img {

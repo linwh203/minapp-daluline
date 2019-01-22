@@ -12,8 +12,12 @@
       </div>
     </div>
     <div class="flex" v-if="imgList.length<9">
-      <img src="../../assets/icon-my-suggest.png" class="upload" @click="upload">
-      <div class="upload-text">上传照片</div>
+      <img
+        src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/Other/upload_image.jpg"
+        class="upload"
+        @click="upload"
+      >
+      <!-- <div class="upload-text">上传照片</div> -->
     </div>
     <div class="submit" @click="submit">确定提交</div>
   </div>
