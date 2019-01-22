@@ -194,7 +194,7 @@ export default {
           this.polygons = [
             {
               points: data,
-              strokeColor: "#50B028AA",
+              strokeColor: "#50B028",
               strokeWidth: 4,
               fillColor: "#A3D49257"
             }
