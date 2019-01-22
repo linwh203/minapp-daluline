@@ -425,6 +425,7 @@ export default {
   height: @h;
   position: relative;
   .top {
+    transform: translateY(15rpx);
     display: flex;
     align-items: center;
   }
@@ -438,7 +439,7 @@ export default {
   &-item {
     width: 92rpx;
     height: 86rpx;
-    margin-bottom: 15rpx;
+    // margin-bottom: 15rpx;
     position: relative;
   }
   &-line {
@@ -447,11 +448,15 @@ export default {
     background: #fff;
   }
   .audio {
-    background: url("https://gw.alicdn.com/tfs/TB1gKqwv3TqK1RjSZPhXXXfOFXa-73-78.png")
+    transform: translateX(-12rpx);
+
+    background: url("https://dl-line.oss-cn-shenzhen.aliyuncs.com/detail/play.png")
       no-repeat center/contain;
   }
   .pause {
-    background: url("https://gw.alicdn.com/tfs/TB1.ayEv5rpK1RjSZFhXXXSdXXa-71-78.png")
+    transform: translateX(-12rpx);
+
+    background: url("https://dl-line.oss-cn-shenzhen.aliyuncs.com/detail/stop.png")
       no-repeat center/contain;
   }
   // .audio:after,.video:after,.note:after,.pause:after{
@@ -473,22 +478,22 @@ export default {
   }
   .english {
     // margin-left: 6%;
-    background: url("https://gw.alicdn.com/tfs/TB1c2i4v4YaK1RjSZFnXXa80pXa-79-78.png")
+    background: url("https://dl-line.oss-cn-shenzhen.aliyuncs.com/detail/en.png")
       no-repeat center/contain;
   }
   .chinese {
     // margin-left: 6%;
-    background: url("https://gw.alicdn.com/tfs/TB1wmyZv3HqK1RjSZFkXXX.WFXa-79-78.png")
+    background: url("https://dl-line.oss-cn-shenzhen.aliyuncs.com/detail/zh.png")
       no-repeat center/contain;
   }
   .note {
     // margin-left: 6%;
-    background: url("https://gw.alicdn.com/tfs/TB1hE2rA3HqK1RjSZJnXXbNLpXa-83-94.png")
+    background: url("https://dl-line.oss-cn-shenzhen.aliyuncs.com/detail/copyright.png")
       no-repeat center/contain;
   }
   .share {
     // margin-left: 6%;
-    background: url("https://gw.alicdn.com/tfs/TB13iiIv7zoK1RjSZFlXXai4VXa-82-78.png")
+    background: url("https://dl-line.oss-cn-shenzhen.aliyuncs.com/detail/share.png")
       no-repeat center/contain;
     transform: translateX(12rpx);
   }
