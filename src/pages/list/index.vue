@@ -47,7 +47,11 @@
     <div class="cover" v-if="showCover"></div>
     <div class="ruleLayer" v-if="showCover">
       <scroll-view scroll-y class="ruleLayer-main">
-        <img mode="widthFix" src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/Other/Copyright.jpg" alt="">
+        <img
+          mode="widthFix"
+          src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/Other/Copyright.jpg"
+          alt
+        >
       </scroll-view>
       <div class="close" @click="showCover = false"></div>
     </div>
@@ -282,8 +286,8 @@ export default {
 }
 .container {
   position: relative;
-  background: url("https://gw.alicdn.com/tfs/TB1GOmAvVYqK1RjSZLeXXbXppXa-640-1881.png")
-    repeat-y top/cover;
+  // background: url("https://gw.alicdn.com/tfs/TB1GOmAvVYqK1RjSZLeXXbXppXa-640-1881.png")
+  // repeat-y top/cover;
   color: #fff;
   padding: 20rpx;
 }
@@ -360,7 +364,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom:20rpx;
+    padding-bottom: 20rpx;
     text-align: center;
     background: url("https://gw.alicdn.com/tfs/TB1fuG0v3HqK1RjSZFkXXX.WFXa-630-94.png")
       no-repeat center/contain;
@@ -555,10 +559,10 @@ export default {
   left: 0;
   right: 0;
   margin: auto;
-  &-main{
+  &-main {
     width: 500rpx;
     height: 760rpx;
-    img{
+    img {
       width: 100%;
     }
   }
