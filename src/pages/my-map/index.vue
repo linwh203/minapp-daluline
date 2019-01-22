@@ -557,6 +557,7 @@ export default {
       background-color: #fff;
       display: flex;
       align-items: center;
+      width: 0;
     }
     &-pic {
       width: 136rpx;
