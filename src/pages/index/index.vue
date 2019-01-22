@@ -87,11 +87,14 @@
           class="spot-item"
           v-for="(item,index) in fullSpot"
           :key="index"
-          :class="activeIndex == index+1?'active':''"
           :id="'spot'+item.num"
           :style="{top:item.y+'%'}"
         >
-          <div @click="chooseSpot(item,index)">{{item.num}}</div>
+          <div
+            class="number"
+            :class="activeIndex == index+1?'active':''"
+            @click="chooseSpot(item,index)"
+          >{{item.num}}</div>
           <div class="spot-item-tri" v-if="activeIndex == index+1"></div>
           <div
             class="spot-item-window"
@@ -575,9 +578,28 @@ export default {
     text-align: center;
     color: #fff;
     font-size: 34rpx;
-    background: url("https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/gray.png")
-      no-repeat center/100%;
     margin-bottom: 7.27%;
+    .number {
+      background: url("https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/gray.png")
+        no-repeat center/100%;
+      transform: scale(1.3);
+      &.active {
+        position: relative;
+        background: url("https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/green.png")
+          no-repeat center/100%;
+      }
+      &.active:after {
+        content: "";
+        width: 28rpx;
+        height: 24rpx;
+        display: block;
+        position: absolute;
+        right: -10rpx;
+        top: 15rpx;
+        background: url("https://gw.alicdn.com/tfs/TB1yEvqv5LaK1RjSZFxXXamPFXa-28-24.png")
+          no-repeat center/100%;
+      }
+    }
     &-window {
       width: 522rpx;
       height: 176rpx;
