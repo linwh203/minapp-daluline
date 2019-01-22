@@ -170,7 +170,7 @@ export default {
         let iconPath = this.getIconPath(n.sortNo);
         return {
           id: n.sortNo,
-          title: n.spot_name,
+          // title: n.spot_name,
           longitude: n.realLng,
           latitude: n.realLat,
           iconPath
