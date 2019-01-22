@@ -655,13 +655,14 @@ export default {
 .scroll {
   position: relative;
   top: @navHeight;
+  left: -37rpx;
   // height: 100%;
   // background: url("https://gw.alicdn.com/tfs/TB15F6gv3HqK1RjSZFkXXX.WFXa-640-6997.png") no-repeat top/cover;
   &-title {
     width: 402rpx;
     height: 278rpx;
     position: absolute;
-    top: 0.1%;
+    top: 40rpx;
     left: 0;
     right: 0;
     margin: auto;
