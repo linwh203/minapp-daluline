@@ -96,6 +96,9 @@ export default {
         : (this.cameraDirection = "back");
     },
     init() {
+      if (isWaiting) {
+        return;
+      }
       this.showResult = false;
       this.src = "";
       this.matchItem = [];
