@@ -96,7 +96,7 @@ export default {
         : (this.cameraDirection = "back");
     },
     init() {
-      if (isWaiting) {
+      if (this.isWaiting) {
         return;
       }
       this.showResult = false;
@@ -127,6 +127,7 @@ export default {
           let data = JSON.parse(res.data).data;
           console.log(data);
           this.postPhoto(data);
+          this.isWaiting = false;
         },
         fail: () => {
           this.isWaiting = false;

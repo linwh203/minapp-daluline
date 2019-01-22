@@ -31,13 +31,10 @@
         <div class="article-text" v-html="item.content"></div>
       </div>
       <div v-if="item.url">
-        <img
-          v-for="(urlItem,urlIndex) in item.url"
-          class="article-img"
-          :key="urlIndex"
-          :src="prefix + urlItem.url"
-          mode="widthFix"
-        >
+        <div class="url-content" v-for="(urlItem,urlIndex) in item.url" :key="urlIndex">
+          <img class="article-img" :src="prefix + urlItem.url" mode="widthFix">
+          <div class="article-title-url" v-if="urlItem.title">{{urlItem.title}}</div>
+        </div>
       </div>
       <!-- <div class="writer" v-if="articleData[1]">
         <div class="writer-title">{{articleData[1].title}}</div>
@@ -370,6 +367,9 @@ export default {
       no-repeat center/contain;
   }
 }
+.url-content {
+  padding: 0 20rpx;
+}
 .article {
   padding: 16rpx;
   font-size: 36rpx;
@@ -384,6 +384,13 @@ export default {
   &-title-full {
     text-align: center;
     margin: 40rpx 0;
+  }
+  &-title-url {
+    text-align: left;
+    // height: 32rpx;
+    font-size: 28rpx;
+    line-height: 28rpx;
+    padding: 10rpx 0 40rpx;
   }
   &-text {
     font-size: 28rpx;
