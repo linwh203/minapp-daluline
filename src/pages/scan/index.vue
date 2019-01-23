@@ -28,7 +28,7 @@
         <p>镜头切换</p>
       </div>
     </div>
-    <div class="modal" v-if="showResult" @click="init"></div>
+    <div class="modal" v-if="showResult" @click="initFromModal"></div>
     <div class="waiting" v-if="isWaiting">
       <div class="text">努力识别中...</div>
       <img src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/photo/loading.png" alt>
@@ -95,10 +95,15 @@ export default {
         ? (this.cameraDirection = "front")
         : (this.cameraDirection = "back");
     },
-    init() {
+    initFromModal() {
       if (this.isWaiting) {
         return;
       }
+      this.init();
+    },
+    init() {
+      console.log("~~~~~~~~~~~~~~~~~~~~~INIT SCAN");
+      this.isWaiting = false;
       this.showResult = false;
       this.src = "";
       this.matchItem = [];
