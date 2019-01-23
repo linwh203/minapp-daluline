@@ -304,7 +304,7 @@ export default {
           this.lineIndex = 3;
           break;
         case 5:
-          top = this.isIP5 ? 3000 : 3800;
+          top = this.isIP5 ? 3200 : 3800;
           if (this.isPlus) {
             top = 4300;
           }
@@ -467,16 +467,19 @@ export default {
         console.log("model", res);
         this.windowHeight = res.windowHeight;
         if (res.model.indexOf("iPhone X") >= 0) {
+          console.log('isIPX')
           this.isIPX = true;
         }
         if (
-          res.model.indexOf("iPhone 6 Plus") ||
-          res.model.indexOf("iPhone 7 Plus") ||
-          res.model.indexOf("iPhone 8 Plus")
+          res.model.indexOf("iPhone 6 Plus") >= 0 ||
+          res.model.indexOf("iPhone 7 Plus") >= 0 ||
+          res.model.indexOf("iPhone 8 Plus") >= 0
         ) {
+          console.log("isPlus")
           this.isPlus = true;
         }
         if (res.model.indexOf("iPhone 5") >= 0) {
+          console.log('isIP5')
           this.isIP5 = true;
         }
         if (res.model.indexOf("iPhone11") >= 0) {
