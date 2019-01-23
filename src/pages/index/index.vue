@@ -467,7 +467,7 @@ export default {
         console.log("model", res);
         this.windowHeight = res.windowHeight;
         if (res.model.indexOf("iPhone X") >= 0) {
-          console.log('isIPX')
+          console.log("isIPX");
           this.isIPX = true;
         }
         if (
@@ -475,11 +475,11 @@ export default {
           res.model.indexOf("iPhone 7 Plus") >= 0 ||
           res.model.indexOf("iPhone 8 Plus") >= 0
         ) {
-          console.log("isPlus")
+          console.log("isPlus");
           this.isPlus = true;
         }
         if (res.model.indexOf("iPhone 5") >= 0) {
-          console.log('isIP5')
+          console.log("isIP5");
           this.isIP5 = true;
         }
         if (res.model.indexOf("iPhone11") >= 0) {
@@ -738,17 +738,17 @@ export default {
 }
 .index-tab {
   position: fixed;
-  top: 220rpx;
+  top: 140rpx;
   right: 20rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   z-index: 21;
-  transform: scale(1.2);
+  // transform: scale(1.2);
   &-item {
-    width: 109rpx;
-    height: 95rpx;
+    width: 120rpx;
+    height: 98rpx;
     margin-bottom: 36rpx;
     position: relative;
     z-index: 23;
@@ -766,7 +766,7 @@ export default {
     background-position: center;
     position: absolute;
     top: 10rpx;
-    right: 39rpx;
+    right: 44rpx;
     z-index: 22;
   }
   img {
