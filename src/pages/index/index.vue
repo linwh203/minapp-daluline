@@ -127,12 +127,12 @@
       >-->
       <img
         mode="widthFix"
-        src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/background_road.png"
+        src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/background_road.png?1"
         class="scroll-road"
       >
       <img
         mode="widthFix"
-        src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/background.png"
+        src="https://dl-line.oss-cn-shenzhen.aliyuncs.com/list/background.png?2"
         class="scroll-bg"
         @load="roadready"
       >
@@ -735,13 +735,14 @@ export default {
 }
 .index-tab {
   position: fixed;
-  top: 133rpx;
+  top: 220rpx;
   right: 20rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   z-index: 21;
+  transform: scale(1.2);
   &-item {
     width: 109rpx;
     height: 95rpx;
