@@ -80,10 +80,10 @@ export default {
   },
 
   created() {
-    const isFirst = wx.getStorageSync("firstvideo");
-    if (!isFirst) {
-      this.showModal = true;
-    }
+    // const isFirst = wx.getStorageSync("firstvideo");
+    // if (!isFirst) {
+    //   this.showModal = true;
+    // }
   },
   onLoad(option) {
     this.videoId = option.id;
