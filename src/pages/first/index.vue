@@ -113,6 +113,7 @@ export default {
         // wx.setStorageSync("userInfo", userInfo);
         this.setStorage("userInfo", userInfo);
         this.motto = false;
+        this.autoClose();
       } else {
         //用户按了拒绝按钮
         console.log("用户按了拒绝按钮");
@@ -122,8 +123,7 @@ export default {
       this.motto = false;
     }
   },
-  onUnload() {
-    // 调用应用实例的方法获取全局数据
+  onLoad() {
     this.getUser();
   },
   created() {}
