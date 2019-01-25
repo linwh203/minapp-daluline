@@ -749,7 +749,7 @@ export default {
   &-item {
     width: 120rpx;
     height: 98rpx;
-    margin-bottom: 36rpx;
+    margin-bottom: 68rpx;
     position: relative;
     z-index: 23;
     // transform: scale(1.1);
