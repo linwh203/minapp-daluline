@@ -27,7 +27,7 @@
     "navigationBarBackgroundColor": "#2b9f62",
     "backgroundColor": "#2b9f62",
     "navigationBarTitleText": "鹿咀自然课堂步道",
-    "navigationBarTextStyle": "#ffffff"
+    "navigationBarTextStyle": "white"
   },
   "permission": {
     "scope.userLocation": {

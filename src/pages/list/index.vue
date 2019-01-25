@@ -16,7 +16,8 @@
         </div>
         <div class="nav-line"></div>
       </div>
-      <div class="nav-border"></div>
+      <div class="nav-border left"></div>
+      <div class="nav-border right"></div>
     </div>
     <div class="main" v-for="(item,index) in articleData" :key="index">
       <div class="bigtitle">{{item.title}}</div>
@@ -499,13 +500,21 @@ export default {
   }
   &-border {
     position: absolute;
-    top: 38%;
-    left: 0;
-    width: 100%;
+    top: 43%;
+    // left: 0;
+    // width: 100%;
+    width: 8rpx;
     box-sizing: border-box;
-    height: 100rpx;
-    border-left: 8rpx solid #fff;
-    border-right: 8rpx solid #fff;
+    height: @h / 2;
+    background-color: #fff;
+    // border-left: 8rpx solid #fff;
+    // border-right: 8rpx solid #fff;
+    &.left {
+      left: 0;
+    }
+    &.right {
+      right: 0;
+    }
   }
 }
 .share-box {
