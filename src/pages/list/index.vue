@@ -212,6 +212,7 @@ export default {
     }
   },
   onLoad(option) {
+    console.log("list option", option);
     // 使用默认的语言
     // 没有默认,就用中文(ch)
     this.lang = wx.getStorageSync("list-lang") || "ch";
@@ -219,7 +220,7 @@ export default {
     // 获取数据
     const index = option.spot_index - 1;
     this.currentIndex = index;
-    console.log({ index });
+    console.log("kkkk", { index });
     this.getSpot(this.spotLine).then(data => {
       this.spotList = data;
       this.loadDetail();
@@ -242,7 +243,7 @@ export default {
   },
   onShow() {
     if (this.init) {
-      this.loadDetail();
+      // this.loadDetail();
     }
     // this.innerAudioContext = wx.createInnerAudioContext();
   },
@@ -251,7 +252,8 @@ export default {
   },
   onShareAppMessage(result) {
     let title = "鹿咀自然课堂步道";
-    let path = "/pages/list/main?spot_index=" + this.activeIndex;
+    let path =
+      "/pages/index/main?share_from=list&spot_index=" + this.activeIndex;
     let imageUrl = "../../assets/list-pic-1.png";
     // let desc = '这里是描述哦'
     // if (result.from === "button") {

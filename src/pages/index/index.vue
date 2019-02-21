@@ -444,6 +444,7 @@ export default {
   },
   mounted() {},
   onLoad(option) {
+    console.log("index option", option);
     if (option.share_from) {
       if (option.share_from === "list") {
         this.bindTab(
