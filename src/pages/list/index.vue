@@ -184,7 +184,7 @@ export default {
     getSpot(line) {
       let storageName = "DaluList";
       let storageData;
-      let requestUrl = "attraction/listDetail";
+      let requestUrl = "attraction/List";
       return new Promise(resolve => {
         storageData = wx.getStorageSync(storageName);
         if (storageData) {
@@ -198,7 +198,7 @@ export default {
             method: "GET",
             dataType: "json", //如果设为json，会尝试对返回的数据做一次 JSON.parse
             success: res => {
-              const data = this.res.data.data;
+              const data = res.data.data;
               resolve(data);
             }
           });

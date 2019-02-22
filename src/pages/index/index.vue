@@ -453,6 +453,7 @@ export default {
       } else {
         this.bindTab(`../${option.share_from}/main`);
       }
+      return;
     }
     // 判断是否第一次使用
     const firsttime = wx.getStorageSync("firsttime");
