@@ -156,6 +156,24 @@ export default {
         lang === "ch"
           ? config.base + "attraction/listdetail"
           : config.base + "attraction/englishlistdetail";
+      
+      wx.showModal({
+        title: '开始loaddetail', //提示的标题,
+        content: 'start', //提示的内容,
+        showCancel: true, //是否显示取消按钮,
+        cancelText: '取消', //取消按钮的文字，默认为取消，最多 4 个字符,
+        cancelColor: '#000000', //取消按钮的文字颜色,
+        confirmText: '确定', //确定按钮的文字，默认为取消，最多 4 个字符,
+        confirmColor: '#3CC51F', //确定按钮的文字颜色,
+        success: res => {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      });
+
       wx.request({
         url, //开发者服务器接口地址",
         data: {
@@ -167,6 +185,25 @@ export default {
           console.log(res.data.data);
           // this.articleData = res.data.data.items
           this.articleData = this.formatDetail(res.data.data.items);
+
+          wx.showModal({
+            title: 'loadDetail finish', //提示的标题,
+            content: `${this.articleData.length}`, //提示的内容,
+            showCancel: true, //是否显示取消按钮,
+            cancelText: '取消', //取消按钮的文字，默认为取消，最多 4 个字符,
+            cancelColor: '#000000', //取消按钮的文字颜色,
+            confirmText: '确定', //确定按钮的文字，默认为取消，最多 4 个字符,
+            confirmColor: '#3CC51F', //确定按钮的文字颜色,
+            success: res => {
+              if (res.confirm) {
+                console.log('用户点击确定')
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          });
+
+
           this.innerAudioContext = wx.createInnerAudioContext();
           this.audioUrl = res.data.data.audio_url;
           this.videoUrl =
@@ -185,25 +222,54 @@ export default {
       let storageName = "DaluList";
       let storageData;
       let requestUrl = "attraction/List";
-      return new Promise(resolve => {
-        storageData = wx.getStorageSync(storageName);
-        if (storageData) {
-          resolve(storageData);
-        } else {
-          wx.request({
-            url: config.base + requestUrl, //开发者服务器接口地址",
-            data: {
-              lineId: config.lineId
-            }, //请求的参数",
-            method: "GET",
-            dataType: "json", //如果设为json，会尝试对返回的数据做一次 JSON.parse
+      wx.request({
+        url: config.base + requestUrl, //开发者服务器接口地址",
+        data: {
+          lineId: config.lineId
+        }, //请求的参数",
+        method: "GET",
+        dataType: "json", //如果设为json，会尝试对返回的数据做一次 JSON.parse
+        success: res => {
+          const data = res.data.data;
+          this.spotList = data;
+          wx.showModal({
+            title: 'getSpot finish', //提示的标题,
+            content: `${this.spotList.length}`, //提示的内容,
+            showCancel: true, //是否显示取消按钮,
+            cancelText: '取消', //取消按钮的文字，默认为取消，最多 4 个字符,
+            cancelColor: '#000000', //取消按钮的文字颜色,
+            confirmText: '确定', //确定按钮的文字，默认为取消，最多 4 个字符,
+            confirmColor: '#3CC51F', //确定按钮的文字颜色,
             success: res => {
-              const data = res.data.data;
-              resolve(data);
+              if (res.confirm) {
+                console.log('用户点击确定')
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
             }
           });
+          this.loadDetail();
         }
       });
+      // return new Promise(resolve => {
+      //   storageData = wx.getStorageSync(storageName);
+      //   if (storageData) {
+      //     resolve(storageData);
+      //   } else {
+      //     wx.request({
+      //       url: config.base + requestUrl, //开发者服务器接口地址",
+      //       data: {
+      //         lineId: config.lineId
+      //       }, //请求的参数",
+      //       method: "GET",
+      //       dataType: "json", //如果设为json，会尝试对返回的数据做一次 JSON.parse
+      //       success: res => {
+      //         const data = res.data.data;
+      //         resolve(data);
+      //       }
+      //     });
+      //   }
+      // });
     },
     changeLang() {
       this.lang = this.lang === "ch" ? "en" : "ch";
@@ -212,6 +278,22 @@ export default {
     }
   },
   onLoad(option) {
+    wx.showModal({
+      title: 'onload', //提示的标题,
+      content: 'content', //提示的内容,
+      showCancel: true, //是否显示取消按钮,
+      cancelText: '取消', //取消按钮的文字，默认为取消，最多 4 个字符,
+      cancelColor: '#000000', //取消按钮的文字颜色,
+      confirmText: '确定', //确定按钮的文字，默认为取消，最多 4 个字符,
+      confirmColor: '#3CC51F', //确定按钮的文字颜色,
+      success: res => {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    });
     console.log("list option", option);
     // 使用默认的语言
     // 没有默认,就用中文(ch)
@@ -221,10 +303,11 @@ export default {
     const index = option.spot_index - 1;
     this.currentIndex = index;
     console.log("kkkk", { index });
-    this.getSpot(this.spotLine).then(data => {
-      this.spotList = data;
-      this.loadDetail();
-    });
+    this.getSpot(this.spotLine)
+    // this.getSpot(this.spotLine).then(data => {
+    //   this.spotList = data;
+    //   this.loadDetail();
+    // });
     // 音频
     this.innerAudioContext = wx.createInnerAudioContext();
   },
@@ -242,6 +325,22 @@ export default {
     // this.innerAudioContext = null
   },
   onShow() {
+    wx.showModal({
+      title: 'onshow', //提示的标题,
+      content: 'content', //提示的内容,
+      showCancel: true, //是否显示取消按钮,
+      cancelText: '取消', //取消按钮的文字，默认为取消，最多 4 个字符,
+      cancelColor: '#000000', //取消按钮的文字颜色,
+      confirmText: '确定', //确定按钮的文字，默认为取消，最多 4 个字符,
+      confirmColor: '#3CC51F', //确定按钮的文字颜色,
+      success: res => {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    });
     if (this.init) {
       // this.loadDetail();
     }
