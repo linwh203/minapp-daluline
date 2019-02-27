@@ -143,6 +143,7 @@
 
 <script>
 import { config } from "../../utils/index";
+import { setTimeout } from 'timers';
 
 export default {
   data() {
@@ -445,25 +446,40 @@ export default {
   mounted() {},
   onLoad(option) {
     console.log("index option", option);
+    const spotIndex = decodeURIComponent(option.spot_index);
+    const shareFrom = option.share_from;
+    this.getSpot();
+    // 判断是否第一次使用
+    const firsttime = wx.getStorageSync("firsttime");
+    if (!firsttime) {
+      let url = `../first/main`;
+      if (option.share_from) {
+        if (option.share_from === "list") {
+          url = `../first/main?share_from=${option.share_from}&spot_index=${option.spot_index}`;
+        } else {
+          url = `../first/main?share_from=${option.share_from}`
+        }
+      }
+      wx.redirectTo({ url: url });
+      return
+    } else {
+      console.log(firsttime);
+    }
     if (option.share_from) {
       if (option.share_from === "list") {
-        this.bindTab(
-          `../${option.share_from}/main?spot_index=${option.spot_index}`
-        );
+        const id = this.spotList[option.spot_index-1].spot_id;
+        setTimeout(()=>{
+          this.bindTab(
+            `../list/main?spot_id=${id}`
+          );
+        },500)
       } else {
         this.bindTab(`../${option.share_from}/main`);
       }
       return;
     }
-    // 判断是否第一次使用
-    const firsttime = wx.getStorageSync("firsttime");
-    if (!firsttime) {
-      const url = "../first/main";
-      wx.redirectTo({ url: url });
-    } else {
-      console.log(firsttime);
-    }
-    this.getSpot();
+    
+    // this.getSpot();
     wx.getSystemInfo({
       success: res => {
         console.log("model", res);

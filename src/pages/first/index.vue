@@ -27,7 +27,9 @@ export default {
       isMock: false,
       // isMock: true,
       motto: false,
-      tForAutoClose: undefined
+      tForAutoClose: undefined,
+      shareFrom: '',
+      spotIndex:''
     };
   },
 
@@ -51,7 +53,13 @@ export default {
     bindNext() {
       clearTimeout(this.tForAutoClose);
       wx.setStorageSync("firsttime", true);
-      const url = "../index/main";
+      let url = "../index/main";
+      if (this.shareFrom) {
+        url = url = `../index/main?share_from=${this.shareFrom}`
+        if (this.spotIndex) {
+          url = `../index/main?share_from=${this.shareFrom}&spot_index=${this.spotIndex}`;
+        }
+      }
       wx.redirectTo({ url: url });
     },
     autoClose() {
@@ -123,8 +131,10 @@ export default {
       this.motto = false;
     }
   },
-  onLoad() {
+  onLoad(option) {
     this.getUser();
+    this.shareFrom = option.share_from || null;
+    this.spotIndex = option.spot_index || null;
   },
   created() {}
 };

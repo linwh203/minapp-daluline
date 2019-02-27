@@ -156,26 +156,9 @@ export default {
         lang === "ch"
           ? config.base + "attraction/listdetail"
           : config.base + "attraction/englishlistdetail";
-      
-      wx.showModal({
-        title: '开始loaddetail', //提示的标题,
-        content: 'start', //提示的内容,
-        showCancel: true, //是否显示取消按钮,
-        cancelText: '取消', //取消按钮的文字，默认为取消，最多 4 个字符,
-        cancelColor: '#000000', //取消按钮的文字颜色,
-        confirmText: '确定', //确定按钮的文字，默认为取消，最多 4 个字符,
-        confirmColor: '#3CC51F', //确定按钮的文字颜色,
-        success: res => {
-          if (res.confirm) {
-            console.log('用户点击确定')
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
-        }
-      });
-
+     
       wx.request({
-        url, //开发者服务器接口地址",
+        url: url, //开发者服务器接口地址",
         data: {
           spot_id: spot_id
         }, //请求的参数",
@@ -185,25 +168,6 @@ export default {
           console.log(res.data.data);
           // this.articleData = res.data.data.items
           this.articleData = this.formatDetail(res.data.data.items);
-
-          wx.showModal({
-            title: 'loadDetail finish', //提示的标题,
-            content: `${this.articleData.length}`, //提示的内容,
-            showCancel: true, //是否显示取消按钮,
-            cancelText: '取消', //取消按钮的文字，默认为取消，最多 4 个字符,
-            cancelColor: '#000000', //取消按钮的文字颜色,
-            confirmText: '确定', //确定按钮的文字，默认为取消，最多 4 个字符,
-            confirmColor: '#3CC51F', //确定按钮的文字颜色,
-            success: res => {
-              if (res.confirm) {
-                console.log('用户点击确定')
-              } else if (res.cancel) {
-                console.log('用户点击取消')
-              }
-            }
-          });
-
-
           this.innerAudioContext = wx.createInnerAudioContext();
           this.audioUrl = res.data.data.audio_url;
           this.videoUrl =
@@ -214,100 +178,92 @@ export default {
             this.innerAudioContext.src = this.audioUrl;
           }
         },
-        fail: () => {},
-        complete: () => {}
+        fail: () => {
+        },
+        complete: () => {
+        }
       });
     },
-    getSpot(line) {
+    getSpot() {
       let storageName = "DaluList";
       let storageData;
       let requestUrl = "attraction/List";
-      wx.request({
-        url: config.base + requestUrl, //开发者服务器接口地址",
-        data: {
-          lineId: config.lineId
-        }, //请求的参数",
-        method: "GET",
-        dataType: "json", //如果设为json，会尝试对返回的数据做一次 JSON.parse
-        success: res => {
-          const data = res.data.data;
-          this.spotList = data;
-          wx.showModal({
-            title: 'getSpot finish', //提示的标题,
-            content: `${this.spotList.length}`, //提示的内容,
-            showCancel: true, //是否显示取消按钮,
-            cancelText: '取消', //取消按钮的文字，默认为取消，最多 4 个字符,
-            cancelColor: '#000000', //取消按钮的文字颜色,
-            confirmText: '确定', //确定按钮的文字，默认为取消，最多 4 个字符,
-            confirmColor: '#3CC51F', //确定按钮的文字颜色,
+      return new Promise(resolve => {
+        storageData = this.getStorage(storageName);
+        if (storageData) {
+          resolve(storageData);
+        } else {
+          wx.request({
+            url: config.base + requestUrl, //开发者服务器接口地址",
+            data: {
+              lineId: config.lineId
+            }, //请求的参数",
+            method: "GET",
+            dataType: "json", //如果设为json，会尝试对返回的数据做一次 JSON.parse
             success: res => {
-              if (res.confirm) {
-                console.log('用户点击确定')
-              } else if (res.cancel) {
-                console.log('用户点击取消')
-              }
+              const data = res.data.data;
+              resolve(data);
             }
           });
-          this.loadDetail();
         }
       });
-      // return new Promise(resolve => {
-      //   storageData = wx.getStorageSync(storageName);
-      //   if (storageData) {
-      //     resolve(storageData);
-      //   } else {
-      //     wx.request({
-      //       url: config.base + requestUrl, //开发者服务器接口地址",
-      //       data: {
-      //         lineId: config.lineId
-      //       }, //请求的参数",
-      //       method: "GET",
-      //       dataType: "json", //如果设为json，会尝试对返回的数据做一次 JSON.parse
-      //       success: res => {
-      //         const data = res.data.data;
-      //         resolve(data);
-      //       }
-      //     });
-      //   }
-      // });
     },
     changeLang() {
       this.lang = this.lang === "ch" ? "en" : "ch";
-      wx.setStorageSync("list-lang", this.lang);
+      this.setStorage("list-lang", this.lang);
       this.loadDetail();
     }
   },
   onLoad(option) {
-    wx.showModal({
-      title: 'onload', //提示的标题,
-      content: 'content', //提示的内容,
-      showCancel: true, //是否显示取消按钮,
-      cancelText: '取消', //取消按钮的文字，默认为取消，最多 4 个字符,
-      cancelColor: '#000000', //取消按钮的文字颜色,
-      confirmText: '确定', //确定按钮的文字，默认为取消，最多 4 个字符,
-      confirmColor: '#3CC51F', //确定按钮的文字颜色,
-      success: res => {
-        if (res.confirm) {
-          console.log('用户点击确定')
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
-      }
-    });
     console.log("list option", option);
     // 使用默认的语言
     // 没有默认,就用中文(ch)
-    this.lang = wx.getStorageSync("list-lang") || "ch";
-
+    this.lang = this.getStorage("list-lang") || "ch";
     // 获取数据
+    if (option.spot_id) {
+      let url =
+        this.lang === "ch"
+          ? config.base + "attraction/listdetail"
+          : config.base + "attraction/englishlistdetail";
+      wx.request({
+          url: url, //开发者服务器接口地址",
+          data: {
+            spot_id: option.spot_id
+          }, //请求的参数",
+          method: "GET",
+          dataType: "json", //如果设为json，会尝试对返回的数据做一次 JSON.parse
+          success: res => {
+            wx.showToast({
+              title: `finish detail`, //提示的内容,
+              icon: 'success', //图标,
+              duration: 2000, //延迟时间,
+              mask: true, //显示透明蒙层，防止触摸穿透,
+              success: res => {}
+            });
+            console.log(res.data.data);
+            // this.articleData = res.data.data.items
+            this.articleData = this.formatDetail(res.data.data.items);
+            this.audioUrl = res.data.data.audio_url || '';
+            this.videoUrl =
+              res.data.data.video_url == null
+                ? ""
+                : config.prefix + res.data.data.video_url;
+            this.innerAudioContext = wx.createInnerAudioContext();
+            if (this.audioUrl) {
+              this.innerAudioContext.src = this.audioUrl;
+            }
+          },
+          fail: () => {
+          }
+        });
+      }
+
     const index = option.spot_index - 1;
     this.currentIndex = index;
-    console.log("kkkk", { index });
-    this.getSpot(this.spotLine)
-    // this.getSpot(this.spotLine).then(data => {
-    //   this.spotList = data;
-    //   this.loadDetail();
-    // });
+    this.getSpot().then(data => {
+      this.spotList = data;
+      this.loadDetail();
+    });
     // 音频
     this.innerAudioContext = wx.createInnerAudioContext();
   },
@@ -325,22 +281,6 @@ export default {
     // this.innerAudioContext = null
   },
   onShow() {
-    wx.showModal({
-      title: 'onshow', //提示的标题,
-      content: 'content', //提示的内容,
-      showCancel: true, //是否显示取消按钮,
-      cancelText: '取消', //取消按钮的文字，默认为取消，最多 4 个字符,
-      cancelColor: '#000000', //取消按钮的文字颜色,
-      confirmText: '确定', //确定按钮的文字，默认为取消，最多 4 个字符,
-      confirmColor: '#3CC51F', //确定按钮的文字颜色,
-      success: res => {
-        if (res.confirm) {
-          console.log('用户点击确定')
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
-      }
-    });
     if (this.init) {
       // this.loadDetail();
     }
@@ -350,9 +290,10 @@ export default {
     console.log("onReady");
   },
   onShareAppMessage(result) {
-    let title = "鹿咀自然课堂步道";
     let path =
-      "/pages/index/main?share_from=list&spot_index=" + this.activeIndex;
+      `/pages/index/main?share_from=list&spot_index=${this.currentIndex}`;
+    // let title = `share_from=list&spot_index=${this.currentIndex}`;;
+    let title = "鹿咀自然课堂步道";
     let imageUrl = "../../assets/list-pic-1.png";
     // let desc = '这里是描述哦'
     // if (result.from === "button") {
