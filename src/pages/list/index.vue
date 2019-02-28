@@ -233,13 +233,6 @@ export default {
           method: "GET",
           dataType: "json", //如果设为json，会尝试对返回的数据做一次 JSON.parse
           success: res => {
-            wx.showToast({
-              title: `finish detail`, //提示的内容,
-              icon: 'success', //图标,
-              duration: 2000, //延迟时间,
-              mask: true, //显示透明蒙层，防止触摸穿透,
-              success: res => {}
-            });
             console.log(res.data.data);
             // this.articleData = res.data.data.items
             this.articleData = this.formatDetail(res.data.data.items);

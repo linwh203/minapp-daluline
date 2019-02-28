@@ -467,7 +467,7 @@ export default {
     }
     if (option.share_from) {
       if (option.share_from === "list") {
-        const id = this.spotList[option.spot_index-1].spot_id;
+        const id = this.spotList[option.spot_index].spot_id;
         setTimeout(()=>{
           this.bindTab(
             `../list/main?spot_id=${id}`
