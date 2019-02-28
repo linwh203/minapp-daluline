@@ -471,6 +471,7 @@ export default {
         setTimeout(()=>{
           this.bindTab(
             `../list/main?spot_id=${id}`
+            // `../list/main?spot_index=${spotIndex}`
           );
         },500)
       } else {

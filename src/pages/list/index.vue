@@ -218,43 +218,53 @@ export default {
     console.log("list option", option);
     // 使用默认的语言
     // 没有默认,就用中文(ch)
-    this.lang = this.getStorage("list-lang") || "ch";
+    this.lang = wx.getStorageSync("list-lang") || "ch";
+    let currentId = '';
     // 获取数据
     if (option.spot_id) {
+      currentId = option.spot_id;
       let url =
         this.lang === "ch"
           ? config.base + "attraction/listdetail"
           : config.base + "attraction/englishlistdetail";
       wx.request({
-          url: url, //开发者服务器接口地址",
-          data: {
-            spot_id: option.spot_id
-          }, //请求的参数",
-          method: "GET",
-          dataType: "json", //如果设为json，会尝试对返回的数据做一次 JSON.parse
-          success: res => {
-            console.log(res.data.data);
-            // this.articleData = res.data.data.items
-            this.articleData = this.formatDetail(res.data.data.items);
-            this.audioUrl = res.data.data.audio_url || '';
-            this.videoUrl =
-              res.data.data.video_url == null
-                ? ""
-                : config.prefix + res.data.data.video_url;
-            this.innerAudioContext = wx.createInnerAudioContext();
-            if (this.audioUrl) {
-              this.innerAudioContext.src = this.audioUrl;
-            }
-          },
-          fail: () => {
+        url: url, //开发者服务器接口地址",
+        data: {
+          spot_id: option.spot_id
+        }, //请求的参数",
+        method: "GET",
+        dataType: "json", //如果设为json，会尝试对返回的数据做一次 JSON.parse
+        success: res => {
+          console.log(res.data.data);
+          // this.articleData = res.data.data.items
+          this.articleData = this.formatDetail(res.data.data.items);
+          this.audioUrl = res.data.data.audio_url || '';
+          this.videoUrl =
+            res.data.data.video_url == null
+              ? ""
+              : config.prefix + res.data.data.video_url;
+          this.innerAudioContext = wx.createInnerAudioContext();
+          if (this.audioUrl) {
+            this.innerAudioContext.src = this.audioUrl;
           }
-        });
-      }
+        },
+        fail: () => {
+        }
+      });
+    }
 
-    const index = option.spot_index - 1;
-    this.currentIndex = index;
+    if (option.spot_index) {
+      const index = option.spot_index - 1;
+      this.currentIndex = index;
+    }
+    
     this.getSpot().then(data => {
       this.spotList = data;
+      this.spotList.forEach((item,index) => {
+        if (item.spot_id == currentId) {
+          this.currentIndex = index;
+        }
+      })
       this.loadDetail();
     });
     // 音频
