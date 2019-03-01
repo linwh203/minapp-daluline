@@ -110,6 +110,13 @@ module.exports = {
         to: path.resolve(__dirname, '../dist/static'),
         ignore: ['.*']
       }
-    ])
+    ]),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../src/assets'),
+        to: path.resolve(config.build.assetsPath, './assets'),
+        flatten: true
+      }
+    ]),
   ]
 }
